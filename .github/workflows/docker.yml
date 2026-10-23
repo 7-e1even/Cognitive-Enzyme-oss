@@ -22,15 +22,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: cognitive-enzyme           # 后端 REST :8420 + MCP :8421
+          - name: cognitive-enzyme-oss       # 后端 REST :8420 + MCP :8421
             context: .
             file: Dockerfile
-          - name: cognitive-enzyme-webui     # 管理后台 :13000
+          - name: cognitive-enzyme-oss-webui # 管理后台 :13000
             context: ./webui
             file: webui/Dockerfile
             build_args: |
               CE_BACKEND_URL=http://app:8420
-          - name: cognitive-enzyme-gardener  # 园丁 CC 载具(上下文=仓库根,要 hooks/npm)
+          - name: cognitive-enzyme-oss-gardener # 园丁 CC 载具(上下文=仓库根,要 hooks/npm)
             context: .
             file: ops/gardener/Dockerfile
     steps:

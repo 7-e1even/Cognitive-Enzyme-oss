@@ -38,7 +38,7 @@ services:
       start_period: 5s
 
   app:
-    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme:latest
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-oss:latest
     platform: linux/amd64      # CI 目前只产 amd64;Apple Silicon 上走 Rosetta 转译
     environment:
       CE_PG_HOST: postgres      # 覆盖 .env 里的 localhost:容器内要走服务名
@@ -67,7 +67,7 @@ services:
   # CC 容器镜像(园丁一次性跑 / 对话常驻跑):跑一次 --version 即退出,
   # 真正的运行由 app 经 Engine API 按需拉起。
   gardener:
-    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-gardener:latest
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-oss-gardener:latest
     platform: linux/amd64
     command: ["--version"]
     restart: "no"
@@ -78,13 +78,13 @@ services:
     image: docker:cli
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sh -c 'docker tag ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-gardener:latest ce-gardener || true'
+    command: sh -c 'docker tag ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-oss-gardener:latest ce-gardener || true'
     depends_on:
       - gardener
     restart: "no"
 
   webui:
-    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-webui:latest
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-oss-webui:latest
     platform: linux/amd64
     ports:
       - "13000:13000"
