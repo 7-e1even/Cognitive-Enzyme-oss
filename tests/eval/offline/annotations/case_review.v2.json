@@ -1,0 +1,162 @@
+{
+  "schema": "offline-full-rule-case-review-v2",
+  "reviewer": "agent_content_review",
+  "date": "2026-10-16",
+  "basis": "实际题目所问子问和完整判定 rule；不把 p 低当错误，不把内容风险自动当 Jev 错误；原始概率与注入只用于定位机制",
+  "cases": [
+    {
+      "kind": "unselected",
+      "question_id": "physelite-9795",
+      "memory_id": "a64ad06f-a127-4eb2-8b23-866a228d9efe",
+      "decision_id": "33f6f4acd4a44137880b60c755ee4e28",
+      "logged_version": 2,
+      "problem_sha256": "305232c362c3bfed872e61700c8253478537cef6bf583fb8fbae74def88497bd",
+      "delivered_rule_sha256": "5765751f6ffa16b56eb16c7540c40bfab22c518efe73cf3adf73990931516841",
+      "classification": "indirect_help_not_strong_positive",
+      "reason": "规则限定已知半径求动量/比较径迹，题目只问最短返回时间；最多提供间接公式提示，不能以低 p 判定 Jev 漏判。"
+    },
+    {
+      "kind": "unselected",
+      "question_id": "physelite-7446",
+      "memory_id": "9efbdd1b-d0b4-44d3-95ff-dc45fa6c42b7",
+      "decision_id": "15ca208bec5a453a9eaf21dd2bfcc688",
+      "logged_version": 4,
+      "problem_sha256": "4e5cdfcf2cbd26297d1c557b57f8b719db8cae5f36c0abf9b6a714749bfb37ef",
+      "delivered_rule_sha256": "06b094aa2c91b457e74d5d880f8eff96c96337826d429aa6a08b8637dd3cfdf8",
+      "classification": "requires_analogy_not_direct_error",
+      "reason": "规则触发与示例均为交叉 E、B 场；本题是重力与 B。qE→mg 的数学类比成立，但实际 rule 没写推广，类比题也未发出；不能单据低 p 断言判断器错误。"
+    },
+    {
+      "kind": "unselected",
+      "question_id": "physelite-4427",
+      "memory_id": "05a287a3-125f-44f7-acfe-0ba53d6f00ac",
+      "decision_id": "8740ef37cc894ecb94c831928a427020",
+      "logged_version": 7,
+      "problem_sha256": "ec75fb717a5f61556695884a760e34c45a8e3808a1dbdc006f3707a1a0e413bc",
+      "delivered_rule_sha256": "38b215cad8864942349d0351e98f588c557086d8d597b95fb4dd067528e2ed36",
+      "classification": "complementary_subquestion_policy_rejection",
+      "reason": "牛顿环与全反射服务不同小问；选中全反射是合理的，但牛顿环 p=0.7227 未过补充0.85，不是首段没召回。"
+    },
+    {
+      "kind": "unselected",
+      "question_id": "physelite-8427",
+      "memory_id": "f19374a0-6a5f-47a5-a87b-727f38b6ed6e",
+      "decision_id": "0d880aa4c2b84c75b96ca5b8ceaf5db9",
+      "logged_version": 5,
+      "problem_sha256": "94ff1426bed762a183b7bcd4f54d588dfc8c9fd322d2484df1c9f1f3c280a431",
+      "delivered_rule_sha256": "cc19a111ce446e39852056d6168061ec4068dc9752a6a851509b29cde921a543",
+      "classification": "complementary_subquestion_policy_rejection",
+      "reason": "半波片服务第(3)问，已选规则服务第(2)问；p=0.6981 未过补充0.85，不能把单选第二名当成无用。"
+    },
+    {
+      "kind": "unselected",
+      "question_id": "physelite-280",
+      "memory_id": "afa766a4-1191-4bf0-831f-d27ac0a4818f",
+      "decision_id": "bdf7fb22698e48b5abfcdf9c5d90f462",
+      "logged_version": 9,
+      "problem_sha256": "979bdc97d8ad0ee77ff8833cc8b2af19602f75298f3ecb35f26ac91dd33525fc",
+      "delivered_rule_sha256": "99d48668aee15e6c89703962216c44ee15c4cdd7bcad7850d4b3ba59ac129f48",
+      "classification": "conditional_support_relative_gate_rejection",
+      "reason": "实际 rule 明写薄层近似 d≪r，保存题面没有此条件且图像缺失。确认 p 高却被相对 q 门拦截，但应否放行仍依赖近似条件；另有小振动方法已注入。"
+    },
+    {
+      "kind": "unselected",
+      "question_id": "physelite-416",
+      "memory_id": "07e1f1b0-b6f1-463d-8b35-3cf700cdfd9e",
+      "decision_id": "94258aab23294ddba3478b516b3ac844",
+      "logged_version": 2,
+      "problem_sha256": "aeffece8b43cd8ab5f6f00ad9e43606f1d664f1c505ae75adca54d052da8dec6",
+      "delivered_rule_sha256": "aae9aeda14d03579ccc8ff2e1d9614ec9376be10627fd60a54a59f97aad24f96",
+      "classification": "complementary_subquestion_relative_gate_rejection",
+      "reason": "落到斜面还是地面正是第(3)问；该规则 p=0.9677，q=0.0539 低于补充相对门0.0872。已选的碰撞分解主要服务第(1)问。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-1915",
+      "memory_id": "c5e1e7bb-0a6a-4f2c-b343-dc4a2a83fe46",
+      "decision_id": "42118bbec1534ac3ad1f9f6ac03dab91",
+      "logged_version": 8,
+      "problem_sha256": "b066bd8f3ef59e4652f2e3accf99fa82d2ab68417cc815563c5b360bb51f1922",
+      "delivered_rule_sha256": "045c91f1fea0b6982fc3947f54530ebef5cff3e82b177464768ae34d584610f6",
+      "classification": "content_error_outside_requested_subpart",
+      "reason": "转 π 两次会翻面的句子错误，但题目实际只问旋转 π/2 后电流，核心磁链守恒仍适用；不能把整条被选自动记成 Jev 误判。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-5808",
+      "memory_id": "ab0c7061-eded-4e33-a7e6-21afef88cad4",
+      "decision_id": "10c2d030791a422b954d92aa5905a8bd",
+      "logged_version": 2,
+      "problem_sha256": "fbf6a6188853dfdcc13edf2555b43b86b0724695f3a9dcdef8cc7572e61c96ff",
+      "delivered_rule_sha256": "331424974b081e725a3f901698817661a21c933ee382d3a906e624c24c733466",
+      "classification": "precondition_mismatch",
+      "reason": "题目明确求 t<t₀ 的滑动阶段，rule 却用纯滚动约束消去切向加速度；实际触发与建议都写了纯滚动，Jev 仍给 p=0.8574 并主选。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-2726",
+      "memory_id": "d8cd57a6-eaeb-4b11-b2ae-3e001113ab3d",
+      "decision_id": "788442ad53d24dbcab95e1bbeab0ed98",
+      "logged_version": 5,
+      "problem_sha256": "cad88b7f92a048c82cd3691aa5cfebcc1875a7b84607b537efdee789ab93bc78",
+      "delivered_rule_sha256": "341bc0a6638c70ff85eb5da865450250f78527c1c06a1b2b2b5b0bab7eeb1234",
+      "classification": "precondition_mismatch_and_low_absolute_admission",
+      "reason": "刚杆需要转动动能和两端支承，质点 mgΔh=mv²/2 与单一 N 模板不能照用。p=0.3764 已较低，但 q=0.7646 仍满足主选 p≥0.3/q≥0.5。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-4133",
+      "memory_id": "9efbdd1b-d0b4-44d3-95ff-dc45fa6c42b7",
+      "decision_id": "1b9974db202a45dbab7faae610327d02",
+      "logged_version": 15,
+      "problem_sha256": "81c53c7533470d860b972b55aacb2a7a5e7b015fa63163767e6ab12ba2358853",
+      "delivered_rule_sha256": "aa808e1a3c521c3c14e0287d25907050f5361d2718e9af5cb106383ff919d230",
+      "classification": "partial_support_with_overgeneralization",
+      "reason": "按 B 分解自由度对题目有用；同一条还夹带任意目标直线命中的错误推广。内容须清理，但不能把这次选择直接判为无用或模型误判。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-9959",
+      "memory_id": "81a53ec1-aa1c-4b92-bdaa-ba7c92462be0",
+      "decision_id": "31402daeef3745848fa1ef6cf8e9ceab",
+      "logged_version": 7,
+      "problem_sha256": "d0bed9d69368d445b9a44c8fe7abe1fcfc85d14e1c7267fd9ef8586bc0988529",
+      "delivered_rule_sha256": "fa2a2df68e4ae0310bbfb6547e145e1562c2b577a41e4b7371ba94057f34db03",
+      "classification": "false_claim_reinforced_without_fact_verification",
+      "reason": "题目只问形成半圆轨道的速度条件，记忆的速度公式可用，而周期与半径无关的附加断言错误；整题标为正确后仍给该记忆加分，未验证附加断言。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-5319",
+      "memory_id": "05a287a3-125f-44f7-acfe-0ba53d6f00ac",
+      "decision_id": "09e38ba96dd946b88b485ae34a0b5d6d",
+      "logged_version": 10,
+      "problem_sha256": "a91ce6dac6f5ba8ff7c0c17710f1cbab5150380bfad008f8bda03f3c16e8e041",
+      "delivered_rule_sha256": "f98afad45d76f32477004b7cebb37050ebba1926d1d340996d813419cb1ce864",
+      "classification": "conflicting_phase_instructions",
+      "reason": "本题 n1<n2<n3，两次反射的 π 相位应相消；实际 rule 一边要求按两侧相变调整，一边无条件加 λ/2。属于与所问直接相关的内容冲突，相关性分数不能代替逐句验真。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-1237",
+      "memory_id": "04207fdf-d1c4-4e27-9e98-7bde79ab8a03",
+      "decision_id": "3c5c82c90dca4cf294278a4666bc3656",
+      "logged_version": 17,
+      "problem_sha256": "b75e7105b62e912174c9211cbe05b90bffb8c6a423ff506d1ddaa6347b1d9378",
+      "delivered_rule_sha256": "8ae55bb4ceed0583744c6e383c68861fc032d73e42bc5dc4beec18443bad03d9",
+      "classification": "delivered_scope_conflict",
+      "reason": "角向 ε 的球形电容器中 D 不在球面均匀；实际400字前缀主张固定 Q 时 D 与介质无关，未出现具体角向分支。输入有误导风险，不能把高 p 单独归为模型能力问题。"
+    },
+    {
+      "kind": "injected",
+      "question_id": "physelite-1339",
+      "memory_id": "9efbdd1b-d0b4-44d3-95ff-dc45fa6c42b7",
+      "decision_id": "75814a007861467bb85376c02ab7a5a4",
+      "logged_version": 20,
+      "problem_sha256": "387025fc9cab0d5fa51787535685458f57b4fb0ab8adc88a64ef845a112f8aee",
+      "delivered_rule_sha256": "e8f113067535cf212e88ffca418a5d5c9b7b7c520dd7f45374705ad69b49fef5",
+      "classification": "partial_support_with_parallel_force_scope_error",
+      "reason": "第一问的恒定交叉场可借用分解法，但第二问明确有沿 B 的时变电场，rule 把平行速度一概说成常数不适用；存在内容适用域风险，不能说整题毫无帮助。"
+    }
+  ]
+}

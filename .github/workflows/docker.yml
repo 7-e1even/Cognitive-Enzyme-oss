@@ -1,0 +1,65 @@
+name: docker
+
+# push 到 main 或打 v* tag 时构建三个镜像推到 GHCR;远程服务器用根目录的
+# docker-compose.yml(默认拉 GHCR 镜像)+ scripts/deploy.sh 一键起全栈。
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: cognitive-enzyme           # 后端 REST :8420 + MCP :8421
+            context: .
+            file: Dockerfile
+          - name: cognitive-enzyme-webui     # 管理后台 :13000
+            context: ./webui
+            file: webui/Dockerfile
+            build_args: |
+              CE_BACKEND_URL=http://app:8420
+          - name: cognitive-enzyme-gardener  # 园丁 CC 载具(上下文=仓库根,要 hooks/npm)
+            context: .
+            file: ops/gardener/Dockerfile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ matrix.name }}
+          tags: |
+            type=sha,prefix=sha-
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: ${{ matrix.build_args }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

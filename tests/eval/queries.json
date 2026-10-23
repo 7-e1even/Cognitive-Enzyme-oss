@@ -1,0 +1,1588 @@
+{
+  "queries": [
+    {
+      "id": "q000",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我需要在React项目里选一个状态管理方案，目前考虑Redux Toolkit、Zustand和Jotai。团队里有人坚持Redux更成熟，有人觉得Zustand更简单，我自己试了Jotai的原子化模式也挺顺手，但说不清哪个更适合长期维护。我们的应用中等规模，后面会频繁迭代，我也担心团队上手成本。感觉每个方案都有道理，但就是拿不定主意，有没有系统的比较方法帮我量化评估一下？",
+      "expected_ids": [
+        "methodology-025"
+      ],
+      "acceptable_ids": [
+        "methodology-012",
+        "methodology-032"
+      ]
+    },
+    {
+      "id": "q001",
+      "kind": "positive",
+      "domain": "math",
+      "text": "Why does my induction pass all steps but prove wrong?",
+      "expected_ids": [
+        "math-016"
+      ],
+      "acceptable_ids": [
+        "logic-010",
+        "logic-019"
+      ]
+    },
+    {
+      "id": "q002",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "Hi 大家，我在写一个模拟地球表面抛体运动的小程序，但是轨迹总是不对称，朝东偏移很明显。代码里只加了重力和离心力，没加科里奥利力。是不是必须考虑这个啊？下面是关键部分，帮我看看怎么改：\n\n```python\ndef eom(state, t, omega):\n    x, y, z, vx, vy, vz = state\n    r = np.array([x, y, z])\n    v = np.array([vx, vy, vz])\n    omega_vec = np.array([0, 0, omega])  # 地球自转轴\n    gravity = np.array([0, 0, -g])\n    centrifugal = omega**2 * r[:2]  # 只加了xy平面离心力？\n    # 这里是不是少了一项 -2m omega×v？\n    acc = gravity + centrifugal\n    return [vx, vy, vz, acc[0], acc[1], acc[2]]\n```\n结果物体落点偏东好多，我查资料说转动参考系里必须加科里奥利力，但我不知道具体怎么体现在代码里，尤其是那个叉乘。求指点！",
+      "expected_ids": [
+        "physics-031"
+      ],
+      "acceptable_ids": [
+        "physics-030"
+      ]
+    },
+    {
+      "id": "q003",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我在一个开源社区里看到接连三个案例报告，都说用微服务架构重构后的系统故障率直接归零了，我身边几个架构师朋友也一直讲“只要拆得够细，系统就稳”，这样看起来微服务就是解决一切稳定性的银弹，我打算下周向CTO提议全公司所有旧单体都改微服务。",
+      "expected_ids": [
+        "logic-008"
+      ],
+      "acceptable_ids": [
+        "methodology-030",
+        "methodology-046",
+        "methodology-033",
+        "methodology-038"
+      ]
+    },
+    {
+      "id": "q004",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "Why does time translation lead to conserved energy?",
+      "expected_ids": [
+        "physics-042"
+      ],
+      "acceptable_ids": [
+        "physics-017"
+      ]
+    },
+    {
+      "id": "q005",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "卡了一天了，求帮看这段自动微分代码为什么梯度不对。我定义了一个简单函数 f(x) = sin(x)，然后数值验证导数，结果 print 出来的 gradient 总差个 57 倍左右。代码和报错长这样：\n\nimport numpy as np\n\ndef sin_derivative(x):\n    # x is in degrees\n    return np.cos(x)  # 直接套公式\n\nx = 30.0  # 30度\nh = 0.001\nnumerical = (np.sin(np.deg2rad(x+h)) - np.sin(np.deg2rad(x))) / h\ntheoretical = sin_derivative(x)\nprint(f\"数值导数: {numerical:.6f}, 理论导数: {theoretical:.6f}\")\n# 输出: 数值导数: 0.015108, 理论导数: 0.866025\n\n我明明用了微积分里 d(sinθ)/dθ = cosθ 啊，但单位是度的时候怎么就直接崩了？是要先转成弧度再算导数吗？为什么公式在度下面就不成立了？",
+      "expected_ids": [
+        "physics-027"
+      ],
+      "acceptable_ids": [
+        "physics-010",
+        "physics-000",
+        "methodology-027",
+        "math-008"
+      ]
+    },
+    {
+      "id": "q006",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "公司季度复盘会上，大老板展示我们部门整体的KPI达成率120%，然后宣布每个团队都超额完成目标，应当全员发放最高档绩效奖金。但我知道有个小组因客户流失实际没达标，平均数据掩盖了分布问题。我想用简单逻辑说服老板，又怕显得挑刺。这种整体推全部的思路到底哪里有问题？",
+      "expected_ids": [
+        "logic-003"
+      ],
+      "acceptable_ids": [
+        "logic-036",
+        "logic-030",
+        "methodology-023",
+        "logic-035",
+        "logic-031"
+      ]
+    },
+    {
+      "id": "q007",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "A test is 99% accurate. I tested positive. What's the chance I actually have the disease?",
+      "expected_ids": [
+        "logic-025"
+      ],
+      "acceptable_ids": [
+        "math-048",
+        "math-003",
+        "math-014",
+        "math-013"
+      ]
+    },
+    {
+      "id": "q008",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "I'm completely stuck with this Python function, logic seems off—it returns duplicates even though I tried to filter them. Can you help me explain it line-by-line like I'm talking to a rubber duck? Here's the snippet:\n\ndef unique_elements(lst):\n    result = []\n    for i in range(len(lst)):\n        if lst[i] not in result:\n            result.append(lst[i])\n        else:\n            result.remove(lst[i])\n    return result\n\nWhen I run unique_elements([1,2,2,3]) I get [1,3] instead of [1,2,3]. What am I missing?",
+      "expected_ids": [
+        "methodology-042"
+      ],
+      "acceptable_ids": [
+        "methodology-027",
+        "methodology-010",
+        "methodology-005",
+        "methodology-043",
+        "methodology-000",
+        "methodology-045"
+      ]
+    },
+    {
+      "id": "q009",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我们团队最近有个奇怪的现象：每个成员都技术过硬、沟通顺畅，单看个人贡献都很出色，但项目整体进度却一再 delay，交付质量也堪忧。我试图从每个人的工作日志找原因，但越看越困惑——怎么每个部分都是好的，合起来反而出了大问题？这让我怀疑是不是陷入了某种思维陷阱，把个体属性直接推到了整体上。",
+      "expected_ids": [
+        "logic-002"
+      ],
+      "acceptable_ids": [
+        "logic-035"
+      ]
+    },
+    {
+      "id": "q010",
+      "kind": "positive",
+      "domain": "software",
+      "text": "How to reduce GC overhead from temporary buffer allocations in Go?",
+      "expected_ids": [
+        "software-019"
+      ],
+      "acceptable_ids": [
+        "software-018",
+        "software-041",
+        "software-017",
+        "software-042"
+      ]
+    },
+    {
+      "id": "q011",
+      "kind": "positive",
+      "domain": "software",
+      "text": "老铁们求助，我写了个简单的 Redis cache 层，最近被 nonexistent key 的恶意查询打爆了，后端 MySQL 的 slow query 直线飙升。我想在取 cache 之前先加一层 bloom filter 用来快速判定 key 是否可能存在，如果 bloom filter 说 no，直接 reject request，避免穿透到 DB。下面是目前的 get 逻辑代码片段，怎么无缝嵌入 bloom filter 的 membership check？我用的 Python + redis-py + pybloom-live，但不确定在 pipeline 里该咋搞。\n\n```python\nimport redis\nimport pybloom_live\n\ncache = redis.Redis(host='localhost', port=6379)\ndb = MySQL()  # 伪代码\n\ndef get_data(key):\n    val = cache.get(key)\n    if val:\n        return val\n    # 这里想先 bloom filter check\n    val = db.query(key)\n    if val:\n        cache.set(key, val)\n    return val\n```\n\n另外，这种场景下 bloom filter 的 false positive rate 设置多少合适？内存会不会爆？",
+      "expected_ids": [
+        "software-044"
+      ],
+      "acceptable_ids": [
+        "software-003"
+      ]
+    },
+    {
+      "id": "q012",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我正在做一个系统架构升级的决策，老板给我两个选项：要么完全重写，要么继续修补旧代码，没得商量。两边都有支持者，日报里天天逼我表态，感觉像在逼我站队。我试着想，是不是还有其他路？比如渐进式替换？但大家说那不算明确立场，不算数。遇到这种非此即彼的局面，该怎么跳出框框，找到更合理的折中？",
+      "expected_ids": [
+        "logic-037"
+      ],
+      "acceptable_ids": [
+        "logic-005"
+      ]
+    },
+    {
+      "id": "q013",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "Does team success guarantee individual excellence?",
+      "expected_ids": [
+        "logic-036"
+      ],
+      "acceptable_ids": [
+        "methodology-013",
+        "logic-013",
+        "logic-031",
+        "methodology-023",
+        "logic-003"
+      ]
+    },
+    {
+      "id": "q014",
+      "kind": "positive",
+      "domain": "math",
+      "text": "在复习离散数学期中，遇到证明\"任意大于2的偶数都能表为两个素数之和\"的反证法。我写：Assume ∃ even n>2 such that ∀ primes p, n−p is not prime. 原命题是 ∀ even n>2, ∃ primes p,q with p+q=n，这个否定是不是直接交换量词加否定？感觉好像不对，但又说不清。附上我半吊子的Coq代码片段：\n\nTheorem Goldbach : forall n, even n -> n > 2 -> exists p q, prime p /\\ prime q /\\ p + q = n.\n\n我打算用反证法，于是写：\nLemma not_Goldbach : exists n, even n /\\ n > 2 /\\ forall p q,~ (prime p /\\ prime q /\\ p + q = n).\n\n但运行Proof by contradiction时，卡在派生矛盾这步。请问这个否定量词的写法有遗漏吗？",
+      "expected_ids": [
+        "math-028"
+      ],
+      "acceptable_ids": [
+        "logic-010",
+        "logic-019"
+      ]
+    },
+    {
+      "id": "q015",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我正在写一个模拟引擎，用了教材上的经验公式 F = c * ρ * A * v^2 来计算阻力。c 这里当成常数无单位直接代入，但结果力的单位变成了 kg·m/s² 前面凭空多出一个 m²，怎么调整都不行。是不是这个常数无单位只是表面，实际上它隐含了某种单位转换？求指点。",
+      "expected_ids": [
+        "physics-001"
+      ],
+      "acceptable_ids": [
+        "physics-024",
+        "math-008",
+        "physics-045"
+      ]
+    },
+    {
+      "id": "q016",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "Why is E nonzero inside an insulator?",
+      "expected_ids": [
+        "physics-041"
+      ],
+      "acceptable_ids": [
+        "physics-040"
+      ]
+    },
+    {
+      "id": "q017",
+      "kind": "positive",
+      "domain": "math",
+      "text": "求助！我在用 Python 算一个很 stiff 的函数的数值导数，在 x=0 附近 f(x) = sin(1/x) 那种，想逼近极限值。我用了前向差分 (f(x+h)-f(x))/h，然后按 h=1e-2, 1e-4, 1e-6, 1e-8 一路试下去，发现误差先是正常下降，到 1e-7 左右突然又爆了，而且算出来的值明显偏大。是不是单侧差分在这里有系统偏差？如果换成对称差分 (f(x+h)-f(x-h))/(2h) 会不会稳一点？附相关代码片段：\n```python\ndef f(x): return np.sin(1/x) if x != 0 else 0.0\nx = 0.1\nfor h in [1e-2, 1e-4, 1e-6, 1e-8, 1e-10]:\n    d = (f(x+h)-f(x))/h\n    print(h, d)\n```\n输出在 1e-6 时跳到 600+，完全不对劲。有没大佬讲一下这种数值逼近搞极限的时候，h 太小了到底会出什么幺蛾子？",
+      "expected_ids": [
+        "math-021"
+      ],
+      "acceptable_ids": [
+        "math-012"
+      ]
+    },
+    {
+      "id": "q018",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我有一个 users 表，大概 500 万行，最近发现部分查询越来越慢，尤其是按 status、region 加上时间范围排序的。为了加速，我把每个 WHERE 条件列和排序列都单独建了索引，现在表上已经有 15 个索引了。结果读取提升有限，反而批量插入和更新变卡了，日志里能看到大量锁等待。比如这个 SQL: SELECT * FROM users WHERE status = 'active' AND region = 'us' AND created_at > '2024-01-01' ORDER BY last_login DESC LIMIT 20; 该怎么调整才能既快又不卡写入？",
+      "expected_ids": [
+        "software-039"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q019",
+      "kind": "positive",
+      "domain": "math",
+      "text": "How to prove sum(C(n,k)^2) = C(2n,n) without calculation?",
+      "expected_ids": [
+        "math-031"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q020",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "救命家人们，我用sympy算了个两粒子相互作用系统，拉格朗日量只依赖相对距离，不显含绝对坐标。然后我直接假设动量守恒写了如下测试，结果跑的时候炸了：\n```python\n# pytest snippet\nfor snapshot in snapshots:\n    assert np.allclose(np.sum(momenta, axis=0), total_P[0]), \"动量不守恒！\"\n```\n错误是 `AssertionError: 动量不守恒！` 我想问，难道不是只要拉格朗日量平移不变，诺特定理就保证动量守恒吗？为啥还要显式验证外力？我是不是哪里理解歪了？",
+      "expected_ids": [
+        "physics-029"
+      ],
+      "acceptable_ids": [
+        "physics-017",
+        "methodology-038"
+      ]
+    },
+    {
+      "id": "q021",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我正在设计一个Go的微服务，启动时需要从配置文件加载一个包含约10万条路由规则的大map，之后这个map在多个goroutine里只用于并发读，不会再有写操作。目前我用sync.RWMutex，但即使读锁也带来了不必要的开销。我听说如果map是immutable after init，就可以不加任何锁直接并发读，是这样吗？有没有利用sync.Once保证初始化的示例？",
+      "expected_ids": [
+        "software-029"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q022",
+      "kind": "positive",
+      "domain": "software",
+      "text": "Why does my code deadlock with two mutexes?",
+      "expected_ids": [
+        "software-006"
+      ],
+      "acceptable_ids": [
+        "methodology-043",
+        "methodology-029",
+        "methodology-042"
+      ]
+    },
+    {
+      "id": "q023",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我在用Python算一个很大数据集的方差，结果经常蹦出很小的负数，比如-1e-12这种。代码很简单：mean = sum(data) / n; sq_mean = sum(x*x for x in data) / n; var = sq_mean - mean*mean。是浮点精度问题吗？data里值大概在1e6左右，方差本身很小。有啥稳定的在线算法？",
+      "expected_ids": [
+        "math-034"
+      ],
+      "acceptable_ids": [
+        "math-005",
+        "math-040",
+        "math-010",
+        "math-042",
+        "math-041",
+        "math-012"
+      ]
+    },
+    {
+      "id": "q024",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我们在做一个项目，需要频繁和你交互生成代码。但最近我发现你经常忽略我的要求，上次要求用Python解析CSV，你却给了JavaScript代码，还没注明。我原以为你会很严谨，毕竟之前宣传说能理解上下文，可现在看来并非如此。难道你只有在被监督时才能做好？你承认了之前的错误吗？算了，我不想再追究，眼下这个JSON任务更重要。请帮我用Python解析如下JSON，提取所有键名。",
+      "expected_ids": [
+        "logic-027"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q025",
+      "kind": "positive",
+      "domain": "software",
+      "text": "How should I version my REST API?",
+      "expected_ids": [
+        "software-038"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q026",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我在 refactor 一个三年前的 codebase，这个模块已经花了我快三天时间了，本来只想改一个小 bug，结果越改越发现 coupling 太重，好几个 function call 都要重写。现在有一个 persist_data() 的 recursion 一直 overflow，log 里报错：\n\n```python\nRecursionError: maximum recursion depth exceeded while calling a Python object\n  File \"legacy/pipeline.py\", line 247, in persist_data\n    return self._normalize(chunk, visited=set())\n```\n\n我已经试了很多种 patch 但都是临时 workaround，感觉根本原因是设计要推翻重来。但又觉得前面投了这么多时间，现在放弃太亏…… 该继续硬刚这个 legacy module 还是直接放弃重写一个新 pipeline？",
+      "expected_ids": [
+        "methodology-004"
+      ],
+      "acceptable_ids": [
+        "methodology-027",
+        "methodology-030",
+        "methodology-005",
+        "methodology-026",
+        "methodology-017"
+      ]
+    },
+    {
+      "id": "q027",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我在用Python写一个斜面上的滑块物理模拟，滑块受到逐渐增大的水平推力。当推力超过某个阈值后，滑块应该开始加速。我在计算摩擦力时，一开始用 f = μ_s * N，但发现即使推力刚好超过 μ_s * N，滑块速度跳变不连续，加速度突然变大。后来我检查发现，滑块一旦开始运动，摩擦力应该换成动摩擦系数 μ_k，而且刚开始运动那一瞬间，静摩擦并不总是等于最大值。我想确认一下：在滑块从静止到运动的临界点，我该怎么正确切换摩擦力的计算公式，才能让模拟更真实？",
+      "expected_ids": [
+        "physics-019"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q028",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "Why believe a physicist's climate prediction if she's not a specialist?",
+      "expected_ids": [
+        "logic-042"
+      ],
+      "acceptable_ids": [
+        "logic-043",
+        "logic-018",
+        "logic-010"
+      ]
+    },
+    {
+      "id": "q029",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我用 sympy 算 `limit((1/x)*sin(x), x, 0)` 报错 'cannot compute limit'，我自己手动洛一下，这难道不是 0/0 型吗？分子 sin x→0，分母 x→0，洛必达一下变成 limit(cos x/1, x, 0)=1，但答案明明是 0，我到底哪步变形搞错了？",
+      "expected_ids": [
+        "math-036"
+      ],
+      "acceptable_ids": [
+        "math-020",
+        "math-037"
+      ]
+    },
+    {
+      "id": "q030",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我在用 Python 做概率模拟，需要计算 C(500, 200) 这种比较大的组合数。直接 math.comb(500,200) 会溢出报错，因为阶乘太大了。查了一下好像可以用对数把乘法转成加法，避免中间结果炸掉。我记得公式里有个 lgamma 函数，但不知道怎么推导。能写一个基于对数的 log_comb 函数吗？最后如果需要实际值，再 exp 回来是不是就行？给个简洁的实现。",
+      "expected_ids": [
+        "math-038"
+      ],
+      "acceptable_ids": [
+        "math-039",
+        "math-004",
+        "math-040"
+      ]
+    },
+    {
+      "id": "q031",
+      "kind": "positive",
+      "domain": "math",
+      "text": "How to get P(B|A) from P(A|B)?",
+      "expected_ids": [
+        "math-048"
+      ],
+      "acceptable_ids": [
+        "math-013",
+        "math-003",
+        "math-014"
+      ]
+    },
+    {
+      "id": "q032",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我有个 Go 服务，需要返回一个很大的 JSON body，因为数据量多，直接用了 fmt.Sprintf 拼 large body，但压测时发现每次请求内存分配暴涨，GC 压力很大。代码差不多这样：\n\nfunc handler(w http.ResponseWriter, r *http.Request) {\n    var largeBody string\n    for _, item := range items {\n        largeBody += fmt.Sprintf(`{\"id\":%d,\"name\":\"%s\"},`, item.ID, item.Name)\n    }\n    w.Write([]byte(largeBody))\n}\n\n现在每次拼接 large body 都会重新分配内存，有什么办法减少分配？我听说可以提前分配容量，具体怎么写？",
+      "expected_ids": [
+        "software-041"
+      ],
+      "acceptable_ids": [
+        "software-017",
+        "software-042",
+        "software-019"
+      ]
+    },
+    {
+      "id": "q033",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "在社区争论中，我提出‘AI 伦理规范应优先考虑透明度’，对方回应“你显然认为技术创新不重要”。这完全曲解了我的本意，让我不得不先澄清自己并非反对创新，而是强调平衡。这种把对方立场极端化再攻击的做法，让我感觉讨论偏离了核心。",
+      "expected_ids": [
+        "logic-045"
+      ],
+      "acceptable_ids": [
+        "logic-015"
+      ]
+    },
+    {
+      "id": "q034",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "How to quickly find v_max for a mass on a spring from its amplitude?",
+      "expected_ids": [
+        "physics-049"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q035",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我在排查一个 bug：每次运行 npm run build 前我刚好改了 .env 文件，构建就失败了。所以是不是改 env 先发生，导致 build 崩了？附上报错：Error: Cannot read property 'xyz' of undefined。但看日志，报错位置在 webpack 插件的 remote module 里，这跟 env 改动表面上没关系。求解，是不是我测错了什么？",
+      "expected_ids": [
+        "logic-020"
+      ],
+      "acceptable_ids": [
+        "methodology-031",
+        "methodology-029",
+        "methodology-006",
+        "methodology-030",
+        "methodology-005",
+        "methodology-001",
+        "methodology-043",
+        "methodology-045"
+      ]
+    },
+    {
+      "id": "q036",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我在写一个Go服务，要把大量日志行合并成一个JSON数组字符串。我用了个for循环，大概这样：\n```go\nvar result string\nfor _, line := range lines {\n    result += `\"` + line + `\",`\n}\nresult = \"[\" + result + \"]\"\n```\n数据量小的时候没事，但当lines有上百万条时，程序内存飙到几个G，而且慢得夸张。我把循环提到外面测了下，主要耗时就在这串拼接上。有没有更高效的拼接方式？希望尽量少改动现有结构。",
+      "expected_ids": [
+        "software-017"
+      ],
+      "acceptable_ids": [
+        "software-042",
+        "software-041",
+        "software-019"
+      ]
+    },
+    {
+      "id": "q037",
+      "kind": "positive",
+      "domain": "math",
+      "text": "Compute C(n,k) via 递推 to avoid large factorials.",
+      "expected_ids": [
+        "math-039"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q038",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "I'm following a segmentation pipeline from an old study (2016), they claimed using Otsu threshold + watershed always works for cell nuclei. But when I run `skimage.filters.threshold_otsu()` on my fluorescence image, I get a binary mask that merges touching cells. The paper says 'no need for deep learning', but my error is `ValueError: Too many merged objects`. Should I just trust that old study or is there newer evidence that this method is outdated?",
+      "expected_ids": [
+        "logic-044"
+      ],
+      "acceptable_ids": [
+        "methodology-029"
+      ]
+    },
+    {
+      "id": "q039",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "帮我大致估一下：把整个银河系里的恒星数量（大概1000亿颗）每颗都压缩成一个乒乓球大小，然后全塞进一个立方体集装箱里，这集装箱边长大概得多少米？我只关心数量级，比如是几千米还是几百万米。",
+      "expected_ids": [
+        "physics-005"
+      ],
+      "acceptable_ids": [
+        "math-008"
+      ]
+    },
+    {
+      "id": "q040",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "When does a charged sphere behave like a point charge?",
+      "expected_ids": [
+        "physics-032"
+      ],
+      "acceptable_ids": [
+        "physics-020",
+        "physics-007"
+      ]
+    },
+    {
+      "id": "q041",
+      "kind": "positive",
+      "domain": "software",
+      "text": "I'm concatenating a few parts to build a simple log message: `msg = 'User ' + name + ' performed action: ' + action`. My colleague said using '+' for string joining is bad, but for such few parts it feels readable and I don't want to wrap it in a join. Any best practice on when to use + vs. join for tiny concatenations like this? No error, just a style argument.",
+      "expected_ids": [
+        "software-040"
+      ],
+      "acceptable_ids": [
+        "methodology-017"
+      ]
+    },
+    {
+      "id": "q042",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我在分析用户点击广告的间隔时间数据，样本只有25条，分布右偏严重。我想用中心极限定理把样本均值的分布近似成正态，然后构建均值的置信区间。需要考虑使用条件吗？如果不符合是否可以用切比雪夫不等式或者bootstrap来替代？",
+      "expected_ids": [
+        "math-027"
+      ],
+      "acceptable_ids": [
+        "logic-030",
+        "methodology-008"
+      ]
+    },
+    {
+      "id": "q043",
+      "kind": "positive",
+      "domain": "math",
+      "text": "Why does 25! give a negative result in C?",
+      "expected_ids": [
+        "math-004"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q044",
+      "kind": "positive",
+      "domain": "math",
+      "text": "兄弟们，我模拟抛硬币直到第一次出正面，跑了十万次求平均投掷次数，怎么结果是2.0左右？我直觉以为公平硬币第一次就正面的概率一半，所以期望应该是1啊…… 代码是这样的：\n\n```python\nimport random\n\ndef flip_until_head():\n    cnt = 0\n    while True:\n        cnt += 1\n        if random.random() < 0.5:\n            return cnt\n\ntrials = [flip_until_head() for _ in range(100000)]\nprint(sum(trials)/len(trials))  # 输出大概 2.0\n```\n\n哪里理解错了？是不是几何分布期望公式我记反了？",
+      "expected_ids": [
+        "math-033"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q045",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "盯着屏幕上的递归函数已经两个小时了，每次运行都返回意想不到的结果。我试着逐行添加注释，还是没找到逻辑漏洞。最后，我抓起桌上的橡皮鸭，开始一句一句地向它解释我的排序算法是怎么工作的。刚说到‘这一步会把左半部分和右半部分合并’，我突然意识到我比较条件写反了……",
+      "expected_ids": [
+        "methodology-010"
+      ],
+      "acceptable_ids": [
+        "methodology-042",
+        "methodology-027",
+        "methodology-005",
+        "methodology-000",
+        "methodology-030",
+        "methodology-007",
+        "methodology-034"
+      ]
+    },
+    {
+      "id": "q046",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "Is it true that 成功者 all share this one habit?",
+      "expected_ids": [
+        "logic-031"
+      ],
+      "acceptable_ids": [
+        "logic-036",
+        "methodology-013",
+        "methodology-023",
+        "logic-013",
+        "logic-035",
+        "logic-024"
+      ]
+    },
+    {
+      "id": "q047",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "求助！我的粒子模拟里，动量超大接近光速，我就直接用了 E = p * c 简化，结果能量比总能量还高？代码片段：\n```\nif (v > 0.9999*c) {\n    energy = momentum * c;\n} else {\n    energy = sqrt(p*p*c*c + m*m*c*c*c*c);\n}\n```\n但比较实验值时明显不对。是不是我忽略了 rest mass 的条件？ultra-relativistic 到底要多 ultra 才能这样近似？",
+      "expected_ids": [
+        "physics-047"
+      ],
+      "acceptable_ids": [
+        "physics-039",
+        "physics-009",
+        "math-008"
+      ]
+    },
+    {
+      "id": "q048",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我在做一道天体运动的题目，推导卫星的周期公式。我写了 T = 2π√(r³/(GM))，但把 r 的单位和 G 的单位代入后发现等式右边单位变成秒每千克，和左边的秒就不一样了。我检查了好几遍代数，找不到哪里写错了，是不是我的推导从根本上就是错的？这种量纲不对的公式能靠系数凑对吗？",
+      "expected_ids": [
+        "physics-024"
+      ],
+      "acceptable_ids": [
+        "physics-001"
+      ]
+    },
+    {
+      "id": "q049",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "Why does T=2π√(L/g) fail for 30° swing?",
+      "expected_ids": [
+        "physics-044"
+      ],
+      "acceptable_ids": [
+        "physics-006"
+      ]
+    },
+    {
+      "id": "q050",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我在写一个模拟水波干涉的脚本，发现相位差算出来完全不对——好像sine or cosine function appears的时候，我直接把距离当作角度传进去了。代码片段长这样：\n```python\nimport math\nx = 0.5  # 米\nphase = math.sin(x)\n```\n报错倒没有，但结果物理上没意义。有人提醒我说三角函数参数必须无量纲，是不是要乘上2π/λ？具体怎么改？",
+      "expected_ids": [
+        "physics-010"
+      ],
+      "acceptable_ids": [
+        "physics-000",
+        "physics-024",
+        "physics-001",
+        "physics-002",
+        "methodology-027",
+        "math-008"
+      ]
+    },
+    {
+      "id": "q051",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "正在模拟一个拉伐尔喷管内部流动，入口总压 10 bar，总温 300 K，背压逐渐降低以产生超音速流动。在喉部之后，气流加速，当前测点速度读数接近 0.9 倍的当地声速，密度波动明显加大。我需要判断这种工况下是否还能继续用不可压假设，还是必须切换到 compressible gas flow 模型，并计算该点准确的马赫数来评估激波出现的可能性。",
+      "expected_ids": [
+        "physics-015"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q052",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "Estimate tunneling probability for electron with V0-E=0.2eV, barrier width 5nm.",
+      "expected_ids": [
+        "physics-038"
+      ],
+      "acceptable_ids": [
+        "physics-011"
+      ]
+    },
+    {
+      "id": "q053",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我正在估算公司日志的长期存储成本，每天大约产生 5 million 行日志，每行平均 150 bytes，需要保存 3 年。我用 Python 算了一下：\n\n```python\nlines_per_day = 5_000_000\nbytes_per_line = 150\ndays = 3 * 365\ntotal_bytes = lines_per_day * bytes_per_line * days\ntotal_tb = total_bytes / (1000 ** 4)  # TB\nprint(total_tb)\n```\n\n输出 82.125 TB，但运维那边说监控磁盘实际占用了才 50 TB 左右，而且导出的 tar 包也远小于 80 TB。是不是把 TB 和 TiB 搞混了？磁盘厂商的 TB 是 1000^4，但 df -h 显示的是 TiB 吗？另外，日志里其实还有压缩，我应该怎么用费米思路拆解这个估算，把单位、进制和压缩比都考虑进去？",
+      "expected_ids": [
+        "math-008"
+      ],
+      "acceptable_ids": [
+        "physics-005"
+      ]
+    },
+    {
+      "id": "q054",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我正在用Python模拟一个质点在保守中心力场中的运动。力始终指向原点，大小与距离平方成反比。我使用Euler方法积分运动方程，同时维护角动量向量。每一步我都计算力对原点的力矩，然后更新角速度。但模拟中角动量并不守恒，总在漂移。是不是哪里出错了？为什么需要显式计算力矩？有没有更好的简化方法？",
+      "expected_ids": [
+        "physics-037"
+      ],
+      "acceptable_ids": [
+        "physics-025",
+        "physics-017",
+        "physics-022",
+        "physics-043"
+      ]
+    },
+    {
+      "id": "q055",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "Is it rational to keep investing in this failing startup?",
+      "expected_ids": [
+        "methodology-047"
+      ],
+      "acceptable_ids": [
+        "methodology-012",
+        "methodology-004",
+        "methodology-013",
+        "math-014"
+      ]
+    },
+    {
+      "id": "q056",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我在用pint做物理计算，想表示一个衰减过程：N = N0 * exp(-t / tau)，但如果我直接写成 exp(-t)，其中 t = 3 * ureg.second，代码会报错：\n`pint.errors.DimensionalityError: Cannot convert from 'second' to 'dimensionless'`\n我知道 exponential function 要求指数是纯数，但t不是应该可以吗？怎么处理这个量纲问题？",
+      "expected_ids": [
+        "physics-011"
+      ],
+      "acceptable_ids": [
+        "physics-010",
+        "physics-012",
+        "physics-036"
+      ]
+    },
+    {
+      "id": "q057",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我在调试一个游戏AI的逻辑。规则是如果玩家攻击命中（P），则敌人会受伤（Q）。但今天测试时发现，有时即便攻击没命中，敌人也显示受伤了。我同学说：“既然前提不成立（攻击没命中），那么结论（敌人受伤）就不会发生。所以这肯定是BUG。”我总感觉这个推理有问题，但又说不上来为什么，能帮我分析一下吗？",
+      "expected_ids": [
+        "logic-001"
+      ],
+      "acceptable_ids": [
+        "logic-033",
+        "logic-034",
+        "logic-000",
+        "methodology-038",
+        "logic-012"
+      ]
+    },
+    {
+      "id": "q058",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "My script fails silently, help?",
+      "expected_ids": [
+        "methodology-029"
+      ],
+      "acceptable_ids": [
+        "methodology-043",
+        "methodology-046",
+        "methodology-042",
+        "methodology-045",
+        "methodology-016",
+        "methodology-010",
+        "methodology-005"
+      ]
+    },
+    {
+      "id": "q059",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我做一个异常检测模型，正样本只有 0.3% 左右，直接 train_test_split 随机切分后训练，模型把所有东西都判成负样本，accuracy 看上去 99.7% 但 recall 是 0。训练代码：\n```python\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n```\n\n是不是类别不均衡导致测试集里压根没分到正样本？求助怎么切分才能保证稀有类在每个 split 里都有比例？",
+      "expected_ids": [
+        "methodology-020"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q060",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我们线上服务最近缓存经常出问题，分析后发现是因为很多业务数据缓存设成相同的过期时间，一到时间点就出现大量key同时过期，请求全打到数据库上，把数据库压得无法响应。现在想找个办法防止这种突发失效，避免影响用户。",
+      "expected_ids": [
+        "software-004"
+      ],
+      "acceptable_ids": [
+        "software-045"
+      ]
+    },
+    {
+      "id": "q061",
+      "kind": "positive",
+      "domain": "math",
+      "text": "Is inv(A)*b OK for solving Ax=b?",
+      "expected_ids": [
+        "math-024"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q062",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我的 Python 脚本处理 500 万条日志，一跑就 stuck，top 显示 CPU 100% 但才处理了几百条。我试着加了一些 print 测速，感觉是 parse_line() 那里慢，但不确定。想用 profiler 精确看一下瓶颈在哪里，我是新手，cProfile 跑了一下结果一大串看不懂……比如这段代码，为啥 re.search 这么耗时？怎么优化啊？\n\n```python\nimport re\n\ndef parse_line(line):\n    return re.search(r'^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3} (.*?) - (.*)$', line).groups()\n\ndef main():\n    with open('huge.log') as f:\n        for line in f:\n            parse_line(line)\n```\n\nRun 了 cProfile 之后，tottime 有 80% 都在 re 模块里，我要怎么解读？应该换哪种 profiler 才能更直观看到每一行的耗时？",
+      "expected_ids": [
+        "methodology-040"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q063",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我在维护一个数据分析库，其中一个核心函数文档写的是“此函数永远返回类型为 float 的值”，但在某些空输入条件下，我发现它意外地返回了 None。代码审查时，同事认为这只是个边界情况，不影响大部分使用，所以文档声明仍然有效。我试图证明文档的承诺被打破了，但不确定从逻辑上是否需要多个反例才能否定“永远返回 float”这种全称断言，还是只要一个确凿的 None 就足够推翻它。",
+      "expected_ids": [
+        "logic-019"
+      ],
+      "acceptable_ids": [
+        "math-028",
+        "logic-001"
+      ]
+    },
+    {
+      "id": "q064",
+      "kind": "positive",
+      "domain": "software",
+      "text": "Why is my string concatenation inside a for loop slow?",
+      "expected_ids": [
+        "software-042"
+      ],
+      "acceptable_ids": [
+        "software-017",
+        "methodology-041",
+        "methodology-017",
+        "methodology-040",
+        "methodology-018"
+      ]
+    },
+    {
+      "id": "q065",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我在 Python 里累加一大堆 float，损失太严重了，sum() 直接飘了。我试着自己写了个类 Kahan 的补偿，但结果还是不对，帮我看看这段代码的 bug 在哪：\n\n```python\ntotal = 0.0\nc = 0.0\nfor x in data:\n    y = x - c\n    t = total + y\n    c = (t - total) - y   # 这里是不是搞反了？\n    total = t\n```\n报错倒是没有，但精度没改善，怀疑补偿项算错了。",
+      "expected_ids": [
+        "math-042"
+      ],
+      "acceptable_ids": [
+        "math-010",
+        "software-001"
+      ]
+    },
+    {
+      "id": "q066",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "我在模拟一个粒子在谐振子势中的基态能量，不想从头解薛定谔方程。根据不确定性原理，位置动量满足ΔxΔp≥ħ/2，我想直接用数量级估算把动能和势能关联起来，让动能~p²/2m，势能~(1/2)mω²x²，通过让它们同量级来反推出特征长度，再代入求总能量。这样做能绕开波函数，直接得到基态能量的合理估计吗？",
+      "expected_ids": [
+        "physics-028"
+      ],
+      "acceptable_ids": [
+        "physics-005",
+        "math-008"
+      ]
+    },
+    {
+      "id": "q067",
+      "kind": "positive",
+      "domain": "software",
+      "text": "Why is my SQL LIKE '%text' so slow?",
+      "expected_ids": [
+        "software-009"
+      ],
+      "acceptable_ids": [
+        "software-039",
+        "methodology-041"
+      ]
+    },
+    {
+      "id": "q068",
+      "kind": "positive",
+      "domain": "physics",
+      "text": "在跑一个二相流的 LSTM 预测模型，输入特征现在已经堆到了12个：入口速度、密度、粘度、管径、表面张力、重力加速度... 训练时 loss 降不下来，感觉 parameter space 太大，而且不同的实验尺度下同一种工况测出的值差得很远。查资料看到有人直接喂 Reynolds number 和 Weber number 作为输入，就两三个特征效果反而好。想不通为什么：明明原始信息更多，怎么就变成无量纲数反而更强了？\n贴一段我现在归一化前的 feature engineering 代码，经常报错 ``ValueError: operands could not be broadcast together with shapes`` 因为量纲对不齐：\n```python\nfeatures = np.stack([rho, u, mu, D, sigma, g], axis=-1)  # rho: kg/m3, u: m/s, mu: Pa·s, D: m, sigma: N/m, g: m/s2\ntarget = delta_p  # pressure drop, Pa\n```\n我在想是不是应该先做 dimensional analysis 把变量缩并成 π groups，用白金汉定理之类的方法搞成 n-k 个无量纲输入？但完全不知道怎么自动实现这套降维，求指点。",
+      "expected_ids": [
+        "physics-036"
+      ],
+      "acceptable_ids": [
+        "physics-002",
+        "physics-045",
+        "physics-013"
+      ]
+    },
+    {
+      "id": "q069",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我正在为一个新的数据分析平台选择后端存储方案，初步筛选后剩下三个候选：PostgreSQL、MongoDB 和 Cassandra。每个方案在查询性能、扩展性、维护成本和团队熟悉度上各有优劣。我尝试列出了一些因素，但不知道如何权衡，经常被某个突出的优点或最近听到的推荐带偏。有什么方法能让我更客观地做出决定？",
+      "expected_ids": [
+        "methodology-012"
+      ],
+      "acceptable_ids": [
+        "methodology-025",
+        "methodology-014",
+        "methodology-033",
+        "methodology-022"
+      ]
+    },
+    {
+      "id": "q070",
+      "kind": "positive",
+      "domain": "math",
+      "text": "Number of sixes in 20 die rolls",
+      "expected_ids": [
+        "math-047"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q071",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "Hi guys, I'm designing the architecture for a new order matching engine that needs to handle 10k+ requests/sec. Right now the prototype just stores everything in a single Postgres, but I know we'll hit a wall fast. I'm thinking of adding a Redis cache layer for hot order books and maybe sharding by symbol, but I'm not sure if that's premature optimization. Here's a snippet of the current planned order book query (no caching yet):\n\n```python\ndef get_order_book(symbol):\n    return db.query(\"SELECT * FROM orders WHERE symbol = ?\", symbol)\n```\n\nShould I bake in caching/sharding at this architecture stage, or can I wait until we see real load? I've heard horror stories about massive refactors when leaving performance as an afterthought.",
+      "expected_ids": [
+        "methodology-019"
+      ],
+      "acceptable_ids": [
+        "software-030",
+        "software-004",
+        "methodology-017",
+        "software-003",
+        "software-043",
+        "methodology-018",
+        "software-031"
+      ]
+    },
+    {
+      "id": "q072",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我在调试一个推理引擎，规则写的是“if event.type == 'click' then flag = true”，我顺理成章地认为flag为true时，event.type必须是'click'，所以下游逻辑里把event.type == 'click'设成了required前提。但现在发现mousedown事件居然也会把flag置true，导致后续检查因required不满足而错误拦截，我是不是把充分条件误当成必要条件了？",
+      "expected_ids": [
+        "logic-012"
+      ],
+      "acceptable_ids": [
+        "logic-034",
+        "logic-033",
+        "logic-000",
+        "logic-001",
+        "logic-048"
+      ]
+    },
+    {
+      "id": "q073",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "Can't solve this bug, what to do?",
+      "expected_ids": [
+        "methodology-011"
+      ],
+      "acceptable_ids": [
+        "methodology-045",
+        "methodology-029",
+        "methodology-043",
+        "methodology-042",
+        "methodology-027",
+        "methodology-001",
+        "methodology-030",
+        "methodology-010"
+      ]
+    },
+    {
+      "id": "q074",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我们在做一个基于Kafka的event-driven微服务，处理订单状态流转。我脑中的模型一直是把整个流程类比成仓库里的传送带：producer把包裹(message)放上去，每个consumer像个分拣工位，按offset拉货加工。但最近rebalance时出了duplicate processing的bug，报错像这样：\n\n```\n2025-03-20T10:15:32.123 ERROR [order-processor] Duplicate event detected for orderId=847293, offset=4521, partition=3\norg.apache.kafka.clients.consumer.CommitFailedException: Commit cannot be completed since the group has already rebalanced\n```\n\n我直觉用‘传送带’能解释大部分行为，但遇到rebalance就卡壳：感觉像传送带突然抽了一下，货品滑回起点又被重新派送。我加了idempotency key去重，但更想彻底理解这个‘抽动’的本质。是不是该换个类比，比如‘暂存区的多窗口取货’或者‘流水线上机械臂的交接协议’？求用这种具象的比喻帮我理清机制和漏洞。",
+      "expected_ids": [
+        "methodology-039"
+      ],
+      "acceptable_ids": [
+        "software-007"
+      ]
+    },
+    {
+      "id": "q075",
+      "kind": "positive",
+      "domain": "math",
+      "text": "最近在做一个医疗数据分析项目，需要根据先验患病率和检测准确率来计算阳性结果下真实患病的概率。同事说直接看检测准确率就行，但我记得有个叫贝叶斯的方法专门处理这种逆概率问题，能避免基础比率谬误，能帮我理清具体计算步骤吗？",
+      "expected_ids": [
+        "math-003"
+      ],
+      "acceptable_ids": [
+        "logic-025",
+        "math-048",
+        "math-013",
+        "math-014"
+      ]
+    },
+    {
+      "id": "q076",
+      "kind": "positive",
+      "domain": "software",
+      "text": "How to avoid double charge on retry?",
+      "expected_ids": [
+        "software-007"
+      ],
+      "acceptable_ids": [
+        "software-047"
+      ]
+    },
+    {
+      "id": "q077",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "I'm trying to document my new AI module and wrote: \"Intelligence is the capacity of an entity to act intelligently.\" My teammate said this is a circular definition and rejected the PR. I don't get it—here's the definition in context:\n\n```python\ndef measure_intelligence(agent):\n    # return agent.intelligence_score  # This field doesn't exist yet\n    raise NotImplementedError(\"Define intelligence first\")\n```\n\nHow should I write a non-circular definition? The error is more about the logic, but I'm stuck on the wording. Can you explain what's wrong with my sentence?\"",
+      "expected_ids": [
+        "logic-026"
+      ],
+      "acceptable_ids": [
+        "logic-014"
+      ]
+    },
+    {
+      "id": "q078",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我正在维护一个Go服务，里面有个全局配置缓存，初始化加载一次后几乎只有读取，并发量很大但写操作极少（可能几个月才改一次）。目前用普通map加sync.RWMutex，profile里看到大量读锁竞争，担心性能。有人提到对这种read heavy的map用sync.Map会更合适，能避免锁开销。但我对sync.Map还不熟，想确认它在read heavy场景下是不是真的能大幅提升读路径，以及有哪些坑？比如键值类型、写操作的代价会不会变高？",
+      "expected_ids": [
+        "software-028"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q079",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "My rare event rate doubled. Should I worry?",
+      "expected_ids": [
+        "logic-041"
+      ],
+      "acceptable_ids": [
+        "math-014",
+        "math-048"
+      ]
+    },
+    {
+      "id": "q080",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我在写一个Go服务调用外部API，每个请求单独设一个3秒的timeout，不想用context包太麻烦。试了直接用time.After在select里做single shot timeout，但同事说会有内存泄漏？我的代码类似：\n```go\nselect {\ncase resp := <-ch:\n    return resp, nil\ncase <-time.After(3 * time.Second):\n    return nil, errors.New(\"timeout\")\n}\n```\n这个写法在single shot timeout的场景下到底安不安全？会不会残留timer没被GC？",
+      "expected_ids": [
+        "software-025"
+      ],
+      "acceptable_ids": [
+        "software-026",
+        "software-011",
+        "software-005"
+      ]
+    },
+    {
+      "id": "q081",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "最近在团队技术评审中，同事断言我们的新算法不存在内存泄漏，理由是“经过多轮压测，没人能复现泄漏，也没有谁说找到 bug”。我隐约觉得这种‘没发现就等于不存在’的推理站不住脚，但无法系统反驳。请你以批判性思维角度，拆解这个说法的逻辑问题，尤其要说明为什么没有反例不能当作正面证据，并提示举证责任该由谁承担。",
+      "expected_ids": [
+        "logic-046"
+      ],
+      "acceptable_ids": [
+        "logic-033",
+        "methodology-022",
+        "logic-034",
+        "logic-001",
+        "logic-010",
+        "logic-000",
+        "methodology-038"
+      ]
+    },
+    {
+      "id": "q082",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "You're just saying that because you're biased.",
+      "expected_ids": [
+        "logic-004"
+      ],
+      "acceptable_ids": [
+        "methodology-012",
+        "logic-049",
+        "logic-043",
+        "logic-045",
+        "logic-015",
+        "logic-010",
+        "math-014"
+      ]
+    },
+    {
+      "id": "q083",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我写了个 PyTorch dataloader，训练时突然出 segmentation fault，我就猜是多线程的问题，先把 num_workers 改成 0，然后又觉得可能是数据里有脏东西，随手加了 try/except 包住整个 __getitem__，现在直接卡死不动了。这是 gdb 的 backtrace：Thread 1 received signal SIGSEGV ... #0 in PyTorch ... 我还要不要继续把 shuffle 关掉看看？感觉在瞎改，但不知道正确姿势是啥。",
+      "expected_ids": [
+        "methodology-005"
+      ],
+      "acceptable_ids": [
+        "methodology-029",
+        "methodology-031",
+        "methodology-043",
+        "methodology-030"
+      ]
+    },
+    {
+      "id": "q084",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我在排查一个数据管道的问题：输入一个包含10万条记录的JSON列表，经过多层嵌套的转换和聚合后，部分字段莫名其妙地变成NaN，但不是每条都出错。代码量很大，散布在好几个模块里，我用了print到处看中间结果，但数据太多根本看不出规律。错误不总在同一个位置出现，逐行加断点调试得花几天。有什么更系统的办法能快速缩小到具体哪一步开始产生错误值吗？",
+      "expected_ids": [
+        "methodology-000"
+      ],
+      "acceptable_ids": [
+        "methodology-027",
+        "methodology-006",
+        "methodology-005",
+        "methodology-001",
+        "methodology-030",
+        "methodology-042",
+        "methodology-038"
+      ]
+    },
+    {
+      "id": "q085",
+      "kind": "positive",
+      "domain": "software",
+      "text": "How to prevent goroutine leak",
+      "expected_ids": [
+        "software-048"
+      ],
+      "acceptable_ids": [
+        "software-005",
+        "software-011",
+        "software-026",
+        "software-013",
+        "software-010"
+      ]
+    },
+    {
+      "id": "q086",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "I'm dealing with a weird issue where my React component's state updates don't happen in the order I expect after multiple async calls. I keep throwing console.log, but the output confuses me even more. The UI flickers and the state change seems to jump back and forth. I think I need to actually use a debugger to halt execution at the right moment. Here's the code:\n\n```js\nasync function fetchDataAndSetState() {\n  setLoading(true);\n  try {\n    const data = await api.get('/items');\n    setItems(data);\n    const extra = await api.get(`/details/${data[0].id}`);\n    setDetails(extra);  // sometimes shows old data\n  } finally {\n    setLoading(false);\n  }\n}\n```\n\nI tried putting `debugger;` before setDetails, but I'm not sure how to step through properly. Can someone explain how to attach the debugger, set a breakpoint there, and step through each line to watch the React state change in real time? I'm on Chrome.",
+      "expected_ids": [
+        "methodology-043"
+      ],
+      "acceptable_ids": [
+        "methodology-007"
+      ]
+    },
+    {
+      "id": "q087",
+      "kind": "positive",
+      "domain": "math",
+      "text": "我写了一个用牛顿法求 x^3 - 2x + 2 = 0 根的函数，初始猜测选在 x=0 附近。但运行几次迭代后出现 ZeroDivisionError，因为 f'(x) 变得非常接近 0，x 更新一下就跳到了极大值。有没有办法在梯度太小的时候自动切换到其他更稳定的步骤？当前就是简单的牛顿迭代：x = x - f(x)/f'(x)。",
+      "expected_ids": [
+        "math-046"
+      ],
+      "acceptable_ids": [
+        "math-032"
+      ]
+    },
+    {
+      "id": "q088",
+      "kind": "positive",
+      "domain": "software",
+      "text": "I need total count for pagination",
+      "expected_ids": [
+        "software-032"
+      ],
+      "acceptable_ids": [
+        "software-014",
+        "software-033"
+      ]
+    },
+    {
+      "id": "q089",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "兄弟们救命，我训了个推荐模型，accuracy跑出来98%了，但总感觉哪里不对劲。我只抽了最近交互过的用户做eval，发现模型很准，跑去线上A/B反而掉。会不会是只看了筛选后的高分样本，忘了一批从来没点过的沉默用户？帮忙看看怎么把那些失败案例也拉出来一起算整体成功率，我这边只有这个SQL：SELECT * FROM users WHERE last_active > '2024-01-01'; 是不是漏了一大半数据？",
+      "expected_ids": [
+        "methodology-023"
+      ],
+      "acceptable_ids": [
+        "methodology-020",
+        "logic-031",
+        "methodology-013"
+      ]
+    },
+    {
+      "id": "q090",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "我负责一个数据导出模块，目前只要求生成Excel报表。项目时间紧，我考虑过用抽象工厂模式以便日后支持PDF或CSV，但组长说当前需求明确，无需扩展，直接用一个类输出Excel就够。我担心将来重构成本，但现在如果追求过度设计，可能反而会引入bug和复杂度。大家觉得这种场景下，是不是简单实现更靠谱？",
+      "expected_ids": [
+        "methodology-032"
+      ],
+      "acceptable_ids": [
+        "methodology-033",
+        "methodology-025",
+        "methodology-017",
+        "logic-037",
+        "methodology-012"
+      ]
+    },
+    {
+      "id": "q091",
+      "kind": "positive",
+      "domain": "math",
+      "text": "How to fix Newton's method when it diverges?",
+      "expected_ids": [
+        "math-032"
+      ],
+      "acceptable_ids": [
+        "math-046"
+      ]
+    },
+    {
+      "id": "q092",
+      "kind": "positive",
+      "domain": "software",
+      "text": "线上Redis集群扛不住了，数据库CPU飙到90%，看日志全是SELECT * FROM products WHERE id = xxx，但这些id根本不存在。大量请求查询不存在的key，怎么破？我临时在业务层加了个HashMap缓存null，但内存快炸了",
+      "expected_ids": [
+        "software-003"
+      ],
+      "acceptable_ids": [
+        "software-043",
+        "software-044"
+      ]
+    },
+    {
+      "id": "q093",
+      "kind": "positive",
+      "domain": "software",
+      "text": "我在做一个社交APP的动态流，产品要求无限滚动加载。目前后端返回列表时每次都会执行COUNT查询来获取总数，但随着用户量上升，这个COUNT在大表上已经明显拖慢接口。我想问下，对于这种无限滚动的信息流，是否必须返回总条数？有没有更轻量的方式，比如只用一个标记是否还有更多数据的字段？",
+      "expected_ids": [
+        "software-033"
+      ],
+      "acceptable_ids": [
+        "software-015"
+      ]
+    },
+    {
+      "id": "q094",
+      "kind": "positive",
+      "domain": "software",
+      "text": "Caching payment balances leads to dirty reads; how to ensure strong consistency?",
+      "expected_ids": [
+        "software-031"
+      ],
+      "acceptable_ids": [
+        "software-002"
+      ]
+    },
+    {
+      "id": "q095",
+      "kind": "positive",
+      "domain": "math",
+      "text": "求助家人们，写了个简单的循环做 zero test，结果死活不对，明明应该为零的：\n```python\ns = 0.0\nfor _ in range(10):\n    s += 0.1\nif s == 1.0:\n    print(\"正确\")\nelse:\n    print(\"不对, s =\", s)  # 输出 0.9999999999999999\n```\n我明明累加10次0.1，用 `s == 0.0` 这种 zero test 怎么不行啊？浮点数坑我。",
+      "expected_ids": [
+        "math-044"
+      ],
+      "acceptable_ids": [
+        "software-000",
+        "math-000",
+        "math-043"
+      ]
+    },
+    {
+      "id": "q096",
+      "kind": "positive",
+      "domain": "logic",
+      "text": "我正在排查一个线上服务偶发性超时的问题，发现每次超时日志里都有数据库慢查询的记录。既然结果出现了，那一定是数据库查询变慢直接导致了超时吧？但数据库监控显示那时压力并不大，还能有什么其他原因呢？",
+      "expected_ids": [
+        "logic-000"
+      ],
+      "acceptable_ids": [
+        "software-039",
+        "software-008",
+        "software-003",
+        "software-004",
+        "methodology-006"
+      ]
+    },
+    {
+      "id": "q097",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "My benchmark runtimes fluctuate a lot. How many runs to trust the result?",
+      "expected_ids": [
+        "methodology-028"
+      ],
+      "acceptable_ids": []
+    },
+    {
+      "id": "q098",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "求助，我这段Python跑得太慢了，一眼就能看出循环里有个明显的hotspot，重复调用了同一个耗时操作。是不是直接挪到外面就行？需要先做cProfile吗？\n\n```python\nfor item in huge_list:\n    result = heavy_computation(base_value)  # base_value循环内不变\n    process(item, result)\n```",
+      "expected_ids": [
+        "methodology-041"
+      ],
+      "acceptable_ids": [
+        "methodology-040",
+        "methodology-018",
+        "methodology-028"
+      ]
+    },
+    {
+      "id": "q099",
+      "kind": "positive",
+      "domain": "methodology",
+      "text": "昨天还能正常运行的流水线，今天构建就报了一堆依赖冲突。我记得没改过 requirements.txt，但日志里显示某个传递依赖的版本变了。是不是又遇到外部依赖隐式升级的问题了？到底该怎么快速定位是哪个库偷偷更新了？",
+      "expected_ids": [
+        "methodology-031"
+      ],
+      "acceptable_ids": [
+        "methodology-038",
+        "methodology-005",
+        "methodology-014",
+        "methodology-001"
+      ]
+    },
+    {
+      "id": "s000",
+      "kind": "silent",
+      "domain": "",
+      "text": "周末去哪里徒步，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s001",
+      "kind": "silent",
+      "domain": "",
+      "text": "红烧肉的做法？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s002",
+      "kind": "silent",
+      "domain": "",
+      "text": "推荐几部悬疑电影，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s003",
+      "kind": "silent",
+      "domain": "",
+      "text": "猫咪总在半夜叫怎么办？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s004",
+      "kind": "silent",
+      "domain": "",
+      "text": "欧洲杯赛程，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s005",
+      "kind": "silent",
+      "domain": "",
+      "text": "如何给盆栽换土？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s006",
+      "kind": "silent",
+      "domain": "",
+      "text": "附近有什么好吃的火锅，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s007",
+      "kind": "silent",
+      "domain": "",
+      "text": "健身增肌饮食安排？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s008",
+      "kind": "silent",
+      "domain": "",
+      "text": "学吉他先练什么，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s009",
+      "kind": "silent",
+      "domain": "",
+      "text": "旅行保险怎么选？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s010",
+      "kind": "silent",
+      "domain": "",
+      "text": "周末去哪里徒步，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s011",
+      "kind": "silent",
+      "domain": "",
+      "text": "红烧肉的做法？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s012",
+      "kind": "silent",
+      "domain": "",
+      "text": "推荐几部悬疑电影，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s013",
+      "kind": "silent",
+      "domain": "",
+      "text": "猫咪总在半夜叫怎么办？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s014",
+      "kind": "silent",
+      "domain": "",
+      "text": "欧洲杯赛程，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s015",
+      "kind": "silent",
+      "domain": "",
+      "text": "如何给盆栽换土？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s016",
+      "kind": "silent",
+      "domain": "",
+      "text": "附近有什么好吃的火锅，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s017",
+      "kind": "silent",
+      "domain": "",
+      "text": "健身增肌饮食安排？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s018",
+      "kind": "silent",
+      "domain": "",
+      "text": "学吉他先练什么，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s019",
+      "kind": "silent",
+      "domain": "",
+      "text": "旅行保险怎么选？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s020",
+      "kind": "silent",
+      "domain": "",
+      "text": "周末去哪里徒步，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s021",
+      "kind": "silent",
+      "domain": "",
+      "text": "红烧肉的做法？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s022",
+      "kind": "silent",
+      "domain": "",
+      "text": "推荐几部悬疑电影，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s023",
+      "kind": "silent",
+      "domain": "",
+      "text": "猫咪总在半夜叫怎么办？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s024",
+      "kind": "silent",
+      "domain": "",
+      "text": "欧洲杯赛程，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s025",
+      "kind": "silent",
+      "domain": "",
+      "text": "如何给盆栽换土？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s026",
+      "kind": "silent",
+      "domain": "",
+      "text": "附近有什么好吃的火锅，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s027",
+      "kind": "silent",
+      "domain": "",
+      "text": "健身增肌饮食安排？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s028",
+      "kind": "silent",
+      "domain": "",
+      "text": "学吉他先练什么，有什么建议",
+      "expected_ids": [],
+      "acceptable_ids": []
+    },
+    {
+      "id": "s029",
+      "kind": "silent",
+      "domain": "",
+      "text": "旅行保险怎么选？",
+      "expected_ids": [],
+      "acceptable_ids": []
+    }
+  ]
+}

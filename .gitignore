@@ -1,0 +1,66 @@
+# Secrets
+.env
+
+# Runtime data (user uploads, etc.)
+data/avatars/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Logs
+*.log
+error_log.txt
+
+# 本地一键启动脚本(scripts/dev-up.sh)的进程记录
+.dev-pids/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local agent config
+.agent/
+.agents/
+.claude/
+.code-review-graph/
+.codex/
+
+# Local planning/docs drafts
+docs/
+openspec/
+todo/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp debug files
+mcp_dir.txt
+mcp_source.txt
+
+.pytest_cache/
+
+# 真实数据基准:构建产物与下载缓存不入库(数据许可各异,用 build.py 现场复现)
+tests/eval/realbench/data/
+tests/eval/hardbench/data/
+tests/eval/distill/data/
+tests/eval/offline/data/
+data/distill/
+
+# jev_gate:自动下载的公开数据与 API 响应缓存(run_public.py 会重新下载,缓存可再生)
+tests/eval/jev_gate/out/pub/
+tests/eval/jev_gate/out/cache.jsonl
+logs/
+
+# OSS build artifacts
+webui/node_modules/
+webui/.next/
+webui/.env.local
+webui/tsconfig.tsbuildinfo

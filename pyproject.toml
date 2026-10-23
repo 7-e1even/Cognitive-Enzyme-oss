@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cognitive-enzyme"
+version = "0.2.0"
+description = "System 1 intuition layer for AI agents"
+requires-python = ">=3.11"
+license = { text = "AGPL-3.0-or-later" }
+classifiers = ["License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)"]
+dependencies = [
+    "mcp>=1.0",
+    "fastmcp>=2.0",
+    "pydantic>=2.0",
+    "asyncpg>=0.29.0",
+    "qdrant-client>=1.12.0",
+    "httpx>=0.27.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-dotenv>=1.0.0",
+    "pyjwt>=2.8.0",
+    "passlib[bcrypt]>=1.7.4",
+    # passlib 1.7.4 与 bcrypt>=4.1 不兼容(其 wrap-bug 探针用 >72 字节密码,新 bcrypt 直接抛错)
+    "bcrypt>=4.0,<4.1",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+]
+
+[project.scripts]
+enzyme = "app.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

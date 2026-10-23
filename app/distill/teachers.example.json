@@ -1,0 +1,96 @@
+[
+  {
+    "name": "glm-5.3",
+    "kind": "openai",
+    "url": "https://open.bigmodel.cn/api/coding/paas/v4",
+    "model": "glm-5.3",
+    "key_env": "GLM_API_KEY",
+    "extra": {"thinking": {"type": "enabled"}},
+    "concurrency": 3
+  },
+  {
+    "name": "glm-5.3-anthropic",
+    "kind": "anthropic",
+    "url": "https://open.bigmodel.cn/api/anthropic",
+    "model": "glm-5.3",
+    "key_env": "GLM_API_KEY",
+    "concurrency": 3
+  },
+  {
+    "name": "kimi",
+    "kind": "openai",
+    "url": "https://api.moonshot.cn/v1",
+    "model": "kimi-model-id",
+    "key_env": "KIMI_API_KEY",
+    "concurrency": 2
+  },
+  {
+    "name": "kimi-anthropic",
+    "kind": "anthropic",
+    "url": "https://api.moonshot.cn/anthropic",
+    "model": "kimi-model-id",
+    "key_env": "KIMI_API_KEY",
+    "concurrency": 2
+  },
+  {
+    "name": "claude",
+    "kind": "anthropic",
+    "url": "https://api.anthropic.com",
+    "model": "claude-sonnet-5",
+    "key_env": "ANTHROPIC_API_KEY",
+    "extra": {"thinking": {"type": "enabled", "budget_tokens": 8000}},
+    "max_tokens": 16000,
+    "concurrency": 2
+  },
+  {
+    "name": "openai",
+    "kind": "openai",
+    "url": "https://api.openai.com/v1",
+    "model": "openai-model-id",
+    "key_env": "OPENAI_API_KEY",
+    "temperature": null,
+    "concurrency": 2
+  },
+  {
+    "name": "deepseek",
+    "kind": "openai",
+    "url": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat",
+    "key_env": "DEEPSEEK_API_KEY",
+    "concurrency": 2
+  },
+  {
+    "name": "qwen-dashscope",
+    "kind": "openai",
+    "url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen-model-id",
+    "key_env": "DASHSCOPE_API_KEY",
+    "concurrency": 2
+  },
+  {
+    "name": "openrouter",
+    "kind": "openai",
+    "url": "https://openrouter.ai/api/v1",
+    "model": "vendor/model-id",
+    "key_env": "OPENROUTER_API_KEY",
+    "headers": {"X-Title": "cognitive-enzyme"},
+    "concurrency": 2
+  },
+  {
+    "name": "local-ollama",
+    "kind": "openai",
+    "url": "http://localhost:11434/v1",
+    "model": "qwen3:8b",
+    "concurrency": 1,
+    "timeout": 600
+  },
+  {
+    "name": "laya-local",
+    "kind": "system_one",
+    "url": "http://127.0.0.1:8000/v1",
+    "model": "laya",
+    "key_env": "LAYA_API_KEY",
+    "timeout": 30,
+    "concurrency": 8
+  }
+]

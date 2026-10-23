@@ -1,0 +1,96 @@
+# 一键起全栈(默认拉 CI 已构建的 GHCR 镜像):
+#   docker login ghcr.io(私有包,read:packages PAT;或 GHCR_TOKEN 见 scripts/deploy.sh)
+#   docker compose pull && docker compose up -d
+#
+# 存储端口只绑 127.0.0.1:本机 dev-up 与容器内 app 都可达,服务器上不对公网暴露。
+# CE_GHCR 环境变量可换 registry 前缀(国内代理场景)。
+# 想从源码构建不用 GHCR 时:docker build -t <对应镜像名> .(app)/
+#   -f ops/gardener/Dockerfile .(gardener)/ webui 目录(webui),再把下面 image 名改过去。
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: cognitive_enzyme
+      POSTGRES_USER: enzyme
+      POSTGRES_PASSWORD: enzyme
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U enzyme -d cognitive_enzyme"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "127.0.0.1:6333:6333"   # HTTP / REST
+      - "127.0.0.1:6334:6334"   # gRPC
+    volumes:
+      - qdrantdata:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/localhost/6333'"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+
+  app:
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme:latest
+    platform: linux/amd64      # CI 目前只产 amd64;Apple Silicon 上走 Rosetta 转译
+    environment:
+      CE_PG_HOST: postgres      # 覆盖 .env 里的 localhost:容器内要走服务名
+      CE_QDRANT_URL: http://qdrant:6333
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      # 对全网开放是刻意的:其他机器上的 hook/agent 要能连。安全由认证兜住
+      # (REST 默认要求登录,MCP 首次启动自动生成令牌)——不要在禁用认证后暴露公网。
+      - "8420:8420"             # REST(hook / agent 用)
+      - "8421:8421"             # MCP
+    volumes:
+      # 园丁:app 经宿主机 docker 拉起一次性 ce-gardener 兄弟容器。
+      # 注意:拿到 socket 等于拿到宿主机 root——单用户内网部署可接受,
+      # 不想要园丁能力就删掉这两行,其余功能不受影响。
+      # (docker CLI 直接借宿主机的,Go 静态链接,跨发行版可用;仅 Linux 宿主)
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/local/bin/docker:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+
+  # CC 容器镜像(园丁一次性跑 / 对话常驻跑):跑一次 --version 即退出,
+  # 真正的运行由 app 经 Engine API 按需拉起。
+  gardener:
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-gardener:latest
+    platform: linux/amd64
+    command: ["--version"]
+    restart: "no"
+
+  # app 默认找名为 ce-gardener 的本地镜像;compose 拉下的是 GHCR 全名,
+  # 这里借宿主 docker 补一个短名,零配置即可被 app 拉起。
+  gardener-tag:
+    image: docker:cli
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sh -c 'docker tag ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-gardener:latest ce-gardener || true'
+    depends_on:
+      - gardener
+    restart: "no"
+
+  webui:
+    image: ${CE_GHCR:-ghcr.io}/${CE_GHCR_OWNER:-your-org}/cognitive-enzyme-webui:latest
+    platform: linux/amd64
+    ports:
+      - "13000:13000"
+    depends_on:
+      - app
+
+volumes:
+  pgdata:
+  qdrantdata:

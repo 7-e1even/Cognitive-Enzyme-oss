@@ -1,0 +1,81 @@
+{
+ "real_jev-logged": {
+  "all": {
+   "answered": 710,
+   "noul_auc": 0.9692,
+   "brier": 0.0268,
+   "ece": 0.0738,
+   "choice_top1": 0.8392,
+   "choice_silence": 1.0,
+   "sel_recall": 0.4464,
+   "sel_precision": 0.8204,
+   "sel_silence": 1.0
+  },
+  "biomed": {
+   "answered": 150,
+   "noul_auc": 0.9779,
+   "brier": 0.0223,
+   "ece": 0.0623,
+   "choice_top1": 0.7903,
+   "choice_silence": null,
+   "sel_recall": 0.5291,
+   "sel_precision": 0.8273,
+   "sel_silence": null
+  },
+  "firefox": {
+   "answered": 150,
+   "noul_auc": 0.9817,
+   "brier": 0.0205,
+   "ece": 0.0692,
+   "choice_top1": 0.8864,
+   "choice_silence": null,
+   "sel_recall": 0.6667,
+   "sel_precision": 0.9615,
+   "sel_silence": null
+  },
+  "legal": {
+   "answered": 150,
+   "noul_auc": 0.9472,
+   "brier": 0.0582,
+   "ece": 0.1489,
+   "choice_top1": 0.7705,
+   "choice_silence": null,
+   "sel_recall": 0.2067,
+   "sel_precision": 0.5636,
+   "sel_silence": null
+  },
+  "security": {
+   "answered": 100,
+   "noul_auc": 0.9633,
+   "brier": 0.0303,
+   "ece": 0.0722,
+   "choice_top1": 0.8108,
+   "choice_silence": null,
+   "sel_recall": 0.25,
+   "sel_precision": 0.6739,
+   "sel_silence": null
+  },
+  "silent": {
+   "answered": 60,
+   "noul_auc": null,
+   "brier": 0.0021,
+   "ece": 0.0299,
+   "choice_top1": null,
+   "choice_silence": 1.0,
+   "sel_recall": null,
+   "sel_precision": null,
+   "sel_silence": 1.0
+  },
+  "theorem": {
+   "answered": 100,
+   "noul_auc": 0.9925,
+   "brier": 0.0074,
+   "ece": 0.0157,
+   "choice_top1": 0.913,
+   "choice_silence": null,
+   "sel_recall": 0.53,
+   "sel_precision": 0.9138,
+   "sel_silence": null
+  }
+ }
+}

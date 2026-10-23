@@ -1,0 +1,365 @@
+{
+ "_note": "语料向量最近的 60 对;人工标注 dup=合并不丢任何建议 / not=建议不同、互补、条件不同或方向相反(即使主题相关) / borderline=不计分",
+ "pairs": [
+  {
+   "a": "logic-010",
+   "b": "logic-046",
+   "sim": 0.886,
+   "label": "dup"
+  },
+  {
+   "a": "logic-001",
+   "b": "logic-033",
+   "sim": 0.883,
+   "label": "dup"
+  },
+  {
+   "a": "physics-003",
+   "b": "physics-035",
+   "sim": 0.864,
+   "label": "not"
+  },
+  {
+   "a": "logic-002",
+   "b": "logic-003",
+   "sim": 0.863,
+   "label": "not"
+  },
+  {
+   "a": "math-000",
+   "b": "software-000",
+   "sim": 0.833,
+   "label": "dup"
+  },
+  {
+   "a": "software-027",
+   "b": "software-028",
+   "sim": 0.826,
+   "label": "not"
+  },
+  {
+   "a": "logic-000",
+   "b": "logic-001",
+   "sim": 0.825,
+   "label": "not"
+  },
+  {
+   "a": "logic-000",
+   "b": "logic-033",
+   "sim": 0.825,
+   "label": "not"
+  },
+  {
+   "a": "software-017",
+   "b": "software-042",
+   "sim": 0.824,
+   "label": "dup"
+  },
+  {
+   "a": "logic-000",
+   "b": "logic-034",
+   "sim": 0.808,
+   "label": "dup"
+  },
+  {
+   "a": "physics-009",
+   "b": "physics-039",
+   "sim": 0.799,
+   "label": "dup"
+  },
+  {
+   "a": "software-010",
+   "b": "software-049",
+   "sim": 0.798,
+   "label": "borderline"
+  },
+  {
+   "a": "methodology-010",
+   "b": "methodology-042",
+   "sim": 0.797,
+   "label": "dup"
+  },
+  {
+   "a": "logic-035",
+   "b": "logic-036",
+   "sim": 0.796,
+   "label": "not"
+  },
+  {
+   "a": "software-025",
+   "b": "software-026",
+   "sim": 0.791,
+   "label": "not"
+  },
+  {
+   "a": "logic-016",
+   "b": "logic-047",
+   "sim": 0.779,
+   "label": "dup"
+  },
+  {
+   "a": "logic-033",
+   "b": "logic-034",
+   "sim": 0.776,
+   "label": "not"
+  },
+  {
+   "a": "math-008",
+   "b": "physics-005",
+   "sim": 0.769,
+   "label": "not"
+  },
+  {
+   "a": "methodology-018",
+   "b": "methodology-040",
+   "sim": 0.764,
+   "label": "dup"
+  },
+  {
+   "a": "math-004",
+   "b": "math-038",
+   "sim": 0.764,
+   "label": "borderline"
+  },
+  {
+   "a": "software-016",
+   "b": "software-027",
+   "sim": 0.761,
+   "label": "not"
+  },
+  {
+   "a": "physics-020",
+   "b": "physics-034",
+   "sim": 0.755,
+   "label": "not"
+  },
+  {
+   "a": "logic-010",
+   "b": "logic-011",
+   "sim": 0.753,
+   "label": "borderline"
+  },
+  {
+   "a": "math-020",
+   "b": "math-036",
+   "sim": 0.75,
+   "label": "not"
+  },
+  {
+   "a": "physics-022",
+   "b": "physics-023",
+   "sim": 0.745,
+   "label": "not"
+  },
+  {
+   "a": "physics-033",
+   "b": "physics-034",
+   "sim": 0.745,
+   "label": "not"
+  },
+  {
+   "a": "math-001",
+   "b": "software-001",
+   "sim": 0.743,
+   "label": "dup"
+  },
+  {
+   "a": "logic-011",
+   "b": "logic-046",
+   "sim": 0.743,
+   "label": "borderline"
+  },
+  {
+   "a": "logic-006",
+   "b": "logic-038",
+   "sim": 0.741,
+   "label": "dup"
+  },
+  {
+   "a": "math-010",
+   "b": "math-042",
+   "sim": 0.739,
+   "label": "dup"
+  },
+  {
+   "a": "logic-012",
+   "b": "logic-013",
+   "sim": 0.731,
+   "label": "not"
+  },
+  {
+   "a": "software-005",
+   "b": "software-048",
+   "sim": 0.726,
+   "label": "dup"
+  },
+  {
+   "a": "physics-032",
+   "b": "physics-033",
+   "sim": 0.725,
+   "label": "not"
+  },
+  {
+   "a": "logic-003",
+   "b": "logic-036",
+   "sim": 0.723,
+   "label": "dup"
+  },
+  {
+   "a": "logic-015",
+   "b": "logic-045",
+   "sim": 0.718,
+   "label": "dup"
+  },
+  {
+   "a": "physics-007",
+   "b": "physics-020",
+   "sim": 0.717,
+   "label": "not"
+  },
+  {
+   "a": "logic-008",
+   "b": "logic-030",
+   "sim": 0.717,
+   "label": "dup"
+  },
+  {
+   "a": "physics-020",
+   "b": "physics-033",
+   "sim": 0.713,
+   "label": "not"
+  },
+  {
+   "a": "software-002",
+   "b": "software-030",
+   "sim": 0.713,
+   "label": "not"
+  },
+  {
+   "a": "math-020",
+   "b": "math-037",
+   "sim": 0.712,
+   "label": "not"
+  },
+  {
+   "a": "physics-003",
+   "b": "physics-025",
+   "sim": 0.707,
+   "label": "not"
+  },
+  {
+   "a": "physics-001",
+   "b": "physics-024",
+   "sim": 0.706,
+   "label": "not"
+  },
+  {
+   "a": "physics-000",
+   "b": "physics-024",
+   "sim": 0.705,
+   "label": "not"
+  },
+  {
+   "a": "physics-025",
+   "b": "physics-035",
+   "sim": 0.704,
+   "label": "not"
+  },
+  {
+   "a": "physics-007",
+   "b": "physics-034",
+   "sim": 0.703,
+   "label": "not"
+  },
+  {
+   "a": "methodology-015",
+   "b": "methodology-048",
+   "sim": 0.702,
+   "label": "dup"
+  },
+  {
+   "a": "software-003",
+   "b": "software-004",
+   "sim": 0.699,
+   "label": "not"
+  },
+  {
+   "a": "math-002",
+   "b": "math-026",
+   "sim": 0.698,
+   "label": "dup"
+  },
+  {
+   "a": "math-038",
+   "b": "math-039",
+   "sim": 0.693,
+   "label": "not"
+  },
+  {
+   "a": "software-028",
+   "b": "software-029",
+   "sim": 0.691,
+   "label": "not"
+  },
+  {
+   "a": "logic-009",
+   "b": "logic-020",
+   "sim": 0.691,
+   "label": "not"
+  },
+  {
+   "a": "physics-025",
+   "b": "physics-037",
+   "sim": 0.686,
+   "label": "not"
+  },
+  {
+   "a": "logic-002",
+   "b": "logic-036",
+   "sim": 0.685,
+   "label": "not"
+  },
+  {
+   "a": "methodology-017",
+   "b": "methodology-040",
+   "sim": 0.685,
+   "label": "borderline"
+  },
+  {
+   "a": "logic-001",
+   "b": "logic-034",
+   "sim": 0.685,
+   "label": "not"
+  },
+  {
+   "a": "methodology-001",
+   "b": "methodology-029",
+   "sim": 0.684,
+   "label": "not"
+  },
+  {
+   "a": "methodology-027",
+   "b": "methodology-029",
+   "sim": 0.682,
+   "label": "not"
+  },
+  {
+   "a": "physics-006",
+   "b": "physics-027",
+   "sim": 0.681,
+   "label": "not"
+  },
+  {
+   "a": "methodology-008",
+   "b": "methodology-009",
+   "sim": 0.681,
+   "label": "not"
+  },
+  {
+   "a": "logic-007",
+   "b": "logic-039",
+   "sim": 0.68,
+   "label": "dup"
+  }
+ ]
+}

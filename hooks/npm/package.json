@@ -1,0 +1,39 @@
+{
+  "name": "cognitive-enzyme-hook",
+  "version": "0.4.0",
+  "description": "Claude Code hooks for Cognitive Enzyme: inject System-1 reflexes on prompt (prime) and extract memories on session end (capture).",
+  "type": "module",
+  "bin": {
+    "cognitive-enzyme-hook": "cli.mjs",
+    "ce-prime-hook": "index.mjs",
+    "ce-capture-hook": "capture.mjs",
+    "ce-failure-hook": "failure.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/Cognitive-Enzyme.git",
+    "directory": "hooks/npm"
+  },
+  "homepage": "https://github.com/your-org/Cognitive-Enzyme#readme",
+  "files": [
+    "cli.mjs",
+    "index.mjs",
+    "capture.mjs",
+    "failure.mjs",
+    "common.mjs",
+    "README.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "claude",
+    "hook",
+    "cognitive-enzyme",
+    "mcp",
+    "ai-agent",
+    "system-1"
+  ],
+  "license": "AGPL-3.0-or-later"
+}
