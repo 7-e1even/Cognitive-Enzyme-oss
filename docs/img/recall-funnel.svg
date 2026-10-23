@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" role="img" aria-labelledby="t d">
+  <title id="t">Where the right memory is lost on the way to the judge</title>
+  <desc id="d">Of 83 labelled correct memories on 147 questions a model had failed twice, 65 reach the candidate pool. With the default settings 7 are judged and 6 injected. Judging the whole pool lifts that to 50 judged and 26 injected; the full set of changes reaches 73 recalled, 52 judged and 31 injected.</desc>
+  <style>
+    :root { --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --line:#dcdbd5; --a:#2a78d6; --b:#eb6834; --c:#1baf7a; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --line:#3a3935; --a:#3987e5; --b:#d95926; --c:#199e70; }
+    }
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--ink); font-size: 13px; }
+    .s { fill: var(--ink2); font-size: 12px; }
+    .ti { font-size: 15px; font-weight: 600; }
+    .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .g { stroke: var(--line); stroke-width: 1; }
+  </style>
+  <rect width="880" height="380" fill="var(--bg)"/>
+  <text class="ti" x="24" y="30">Labelled correct memories that reach each stage (of 83)</text>
+  <text class="s" x="24" y="50">147 questions the model failed twice closed-book; 64 of them have an annotated correct memory.</text>
+
+  <!-- axis: 0..83 mapped to 200..800 (7.23 px per unit) -->
+  <g class="g"><path d="M200 70 V300"/><path d="M344.6 70 V300"/><path d="M489.2 70 V300"/><path d="M633.8 70 V300"/><path d="M800 70 V300"/></g>
+  <text class="s" x="200" y="318" text-anchor="middle">0</text>
+  <text class="s" x="344" y="318" text-anchor="middle">20</text>
+  <text class="s" x="489" y="318" text-anchor="middle">40</text>
+  <text class="s" x="634" y="318" text-anchor="middle">60</text>
+  <text class="s" x="800" y="318" text-anchor="middle">83</text>
+
+  <!-- group 1: Judged by the judge -->
+  <text class="s" x="24" y="94">Reach the candidate pool</text>
+  <rect x="200" y="78" width="470" height="12" rx="4" fill="var(--a)"/><text class="v" x="678" y="89">65</text>
+  <rect x="200" y="94" width="470" height="12" rx="4" fill="var(--a)" opacity=".85"/><text class="v" x="678" y="105">65</text>
+  <rect x="200" y="110" width="527" height="12" rx="4" fill="var(--a)" opacity=".7"/><text class="v" x="735" y="121">73</text>
+
+  <text class="s" x="24" y="166">Seen by the judge</text>
+  <rect x="200" y="150" width="51" height="12" rx="4" fill="var(--b)"/><text class="v" x="259" y="161">7</text>
+  <rect x="200" y="166" width="361" height="12" rx="4" fill="var(--b)" opacity=".85"/><text class="v" x="569" y="177">50</text>
+  <rect x="200" y="182" width="376" height="12" rx="4" fill="var(--b)" opacity=".7"/><text class="v" x="584" y="193">52</text>
+
+  <text class="s" x="24" y="238">Injected</text>
+  <rect x="200" y="222" width="43" height="12" rx="4" fill="var(--c)"/><text class="v" x="251" y="233">6</text>
+  <rect x="200" y="238" width="188" height="12" rx="4" fill="var(--c)" opacity=".85"/><text class="v" x="396" y="249">26</text>
+  <rect x="200" y="254" width="224" height="12" rx="4" fill="var(--c)" opacity=".7"/><text class="v" x="432" y="265">31</text>
+
+  <!-- legend -->
+  <g transform="translate(24,330)">
+    <rect width="10" height="10" rx="2" fill="var(--ink2)"/><text class="s" x="16" y="9">top bar in each group: default settings (the judge sees 4 of a 36-candidate pool)</text>
+    <rect y="16" width="10" height="10" rx="2" fill="var(--ink2)" opacity=".85"/><text class="s" x="16" y="25">middle: judge the whole pool</text>
+    <rect x="300" y="16" width="10" height="10" rx="2" fill="var(--ink2)" opacity=".7"/><text class="s" x="316" y="25">bottom: also RRF pool, wider recall</text>
+  </g>
+</svg>

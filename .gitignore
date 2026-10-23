@@ -33,7 +33,6 @@ error_log.txt
 .codex/
 
 # Local planning/docs drafts
-docs/
 openspec/
 todo/
 

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 460" role="img" aria-labelledby="t d">
+  <title id="t">Cognitive Enzyme: the prime, failure, capture and feedback loop</title>
+  <desc id="d">An agent calls prime before a prompt and failure on tool errors. The backend recalls, reranks and judges memories, then injects only the applicable ones. Sessions are captured, extracted into new memories, and feedback reinforces or weakens them.</desc>
+  <style>
+    :root { --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --line:#c9c8c2; --card:#f3f2ee; --a:#2a78d6; --b:#eb6834; --c:#1baf7a; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --line:#4a4943; --card:#242422; --a:#3987e5; --b:#d95926; --c:#199e70; }
+    }
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--ink); }
+    .s { fill: var(--ink2); font-size: 12px; }
+    .t { font-size: 14px; font-weight: 600; }
+    .h { font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+    .box { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+    .ar { stroke: var(--ink2); stroke-width: 1.8; fill: none; marker-end: url(#m); }
+  </style>
+  <defs>
+    <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--ink2)"/>
+    </marker>
+  </defs>
+  <rect width="980" height="460" fill="var(--bg)"/>
+
+  <!-- agent -->
+  <rect class="box" x="24" y="40" width="214" height="380" rx="10"/>
+  <text class="h" x="40" y="66">AGENT</text>
+  <text class="s" x="40" y="84">Claude Code, pi, others</text>
+  <rect x="40" y="104" width="182" height="62" rx="8" fill="var(--a)"/>
+  <text class="t" x="52" y="130" style="fill:#fff">prime</text>
+  <text class="s" x="52" y="150" style="fill:#fff">before each prompt</text>
+  <rect x="40" y="180" width="182" height="62" rx="8" fill="var(--b)"/>
+  <text class="t" x="52" y="206" style="fill:#fff">failure</text>
+  <text class="s" x="52" y="226" style="fill:#fff">on a tool error</text>
+  <rect x="40" y="256" width="182" height="62" rx="8" fill="var(--c)"/>
+  <text class="t" x="52" y="282" style="fill:#fff">capture</text>
+  <text class="s" x="52" y="302" style="fill:#fff">session end / compact</text>
+  <text class="s" x="40" y="352">fail-open: errors are</text>
+  <text class="s" x="40" y="368">swallowed, never block</text>
+
+  <!-- pipeline -->
+  <rect class="box" x="272" y="40" width="500" height="214" rx="10"/>
+  <text class="h" x="288" y="66">RECALL, JUDGE, INJECT</text>
+  <g>
+    <rect x="288" y="84" width="108" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+    <text class="t" x="300" y="108">Recall</text>
+    <text class="s" x="300" y="126">vector + BM25</text>
+    <text class="s" x="300" y="141">+ exemplars</text>
+    <rect x="410" y="84" width="108" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+    <text class="t" x="422" y="108">Rerank</text>
+    <text class="s" x="422" y="126">cross-encoder</text>
+    <rect x="532" y="84" width="118" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+    <text class="t" x="544" y="108">Judge</text>
+    <text class="s" x="544" y="126">p(useful) each,</text>
+    <text class="s" x="544" y="141">one joint choice</text>
+    <rect x="664" y="84" width="96" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+    <text class="t" x="676" y="108">Select</text>
+    <text class="s" x="676" y="126">0..n memories</text>
+    <path class="ar" d="M396 117 H410"/><path class="ar" d="M518 117 H532"/><path class="ar" d="M650 117 H664"/>
+  </g>
+  <text class="s" x="288" y="176">Silence is a valid answer: if the judge says "none of these",</text>
+  <text class="s" x="288" y="193">no memory is injected, critical ones included.</text>
+  <text class="s" x="288" y="210">Methodology hints bypass the silence gate, at most 2 per prompt.</text>
+  <text class="s" x="288" y="227">Weak memories (zombies, contradictions) are quarantined, not forgotten.</text>
+
+  <!-- learning -->
+  <rect class="box" x="272" y="276" width="500" height="144" rx="10"/>
+  <text class="h" x="288" y="302">LEARN</text>
+  <rect x="288" y="316" width="146" height="84" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="300" y="340">Extract</text>
+  <text class="s" x="300" y="358">quality gate, dedup,</text>
+  <text class="s" x="300" y="373">domain routing</text>
+  <rect x="448" y="316" width="146" height="84" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="460" y="340">Feedback</text>
+  <text class="s" x="460" y="358">helped: reinforce</text>
+  <text class="s" x="460" y="373">harmed: weaken</text>
+  <rect x="608" y="316" width="152" height="84" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="620" y="340">Consolidate</text>
+  <text class="s" x="620" y="358">merge, prune, dream,</text>
+  <text class="s" x="620" y="373">mutate, replay</text>
+  <path class="ar" d="M434 358 H448"/><path class="ar" d="M594 358 H608"/>
+
+  <!-- storage -->
+  <rect class="box" x="812" y="40" width="144" height="380" rx="10"/>
+  <text class="h" x="826" y="66">STORES</text>
+  <rect x="826" y="84" width="116" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="836" y="108">PostgreSQL</text>
+  <text class="s" x="836" y="126">memories, logs,</text>
+  <text class="s" x="836" y="141">config</text>
+  <rect x="826" y="164" width="116" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="836" y="188">Qdrant</text>
+  <text class="s" x="836" y="206">vectors and</text>
+  <text class="s" x="836" y="221">BM25 index</text>
+  <rect x="826" y="244" width="116" height="66" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+  <text class="t" x="836" y="268">Models</text>
+  <text class="s" x="836" y="286">LLM, embed,</text>
+  <text class="s" x="836" y="301">rerank, judge</text>
+  <text class="s" x="826" y="346">Console :13000</text>
+  <text class="s" x="826" y="363">REST :8420</text>
+  <text class="s" x="826" y="380">MCP :8421</text>
+
+  <!-- agent <-> backend -->
+  <path class="ar" d="M206 135 H272"/>
+  <path class="ar" d="M206 211 H252 V150 H272" style="stroke-dasharray:4 3"/>
+  <path class="ar" d="M206 287 H240 V358 H272"/>
+  <path class="ar" d="M772 140 H812" style="marker-start:url(#m)"/>
+  <path class="ar" d="M772 358 H812" style="marker-start:url(#m)"/>
+</svg>

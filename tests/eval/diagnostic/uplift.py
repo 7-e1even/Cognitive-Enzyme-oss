@@ -40,6 +40,9 @@ def model_dir(model: str) -> Path:
 CONTROL_N = 40
 
 
+COHORTS: set[str] | None = None   # set in main(); None = all cohorts
+
+
 def question_set() -> dict[str, str]:
     """id → cohort, chosen only from historical closed-book outcomes (never from new answers)."""
     tasks = {t["id"]: t for t in json.loads((SOURCE / "inputs/tasks.json").read_text())}
@@ -60,13 +63,20 @@ def question_set() -> dict[str, str]:
             right.append(pid)
     right.sort(key=lambda pid: sha("control|" + pid))
     cohort.update({pid: "phys_right" for pid in right[:CONTROL_N]})
+    if COHORTS is not None:
+        cohort = {pid: c for pid, c in cohort.items() if c in COHORTS}
     return cohort
 
 
 def injections(arm: str) -> dict[str, list[str]]:
     if arm == "collected":
         return {r["id"]: r["injected_ids"] for r in rows(SOURCE / "retrieval.jsonl") if not r.get("error")}
-    return {r["id"]: r["injected_ids"] for r in rows(OUT / "arms" / f"{arm}.jsonl") if not r.get("error")}
+    from tests.eval.diagnostic.arms import degraded
+    out: dict[str, list[str]] = {}
+    for r in rows(OUT / "arms" / f"{arm}.jsonl"):   # a degraded row (rerank/Jev failure) is never a result
+        if not degraded(r):
+            out[r["id"]] = r["injected_ids"]
+    return out
 
 
 def ids_for(arm: str, task: dict, inj: dict) -> list[str] | None:
@@ -253,8 +263,11 @@ def main():
     ap.add_argument("--max-wait", type=float, default=3 * 3600)
     ap.add_argument("--concurrency", type=int, default=4)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--cohorts", default="phys_wrong,math_wrong",
+                    help="comma list of phys_wrong,math_wrong,phys_right (control); default skips the control")
     args = ap.parse_args()
-    global ANSWERS
+    global ANSWERS, COHORTS
+    COHORTS = set(args.cohorts.split(","))
     ANSWERS = model_dir(args.model) / "answers.jsonl"
     if args.stage == "plan":
         c = question_set()

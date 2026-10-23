@@ -1,135 +1,137 @@
-# Cognitive Enzyme · 认知酶
+# Cognitive Enzyme
 
-**给 AI 智能体的 System 1:不靠模型"想起来去搜",而是在任务开始前,把对的经验自动放进上下文。**
+**A System 1 for AI agents: instead of hoping the model remembers to search, put the right experience into the context before the task starts.**
 
-智能体(Claude Code、pi 或任何能调 REST/MCP 的 agent)每次解题都像第一次:上次踩过的坑、查到的绕过手法、
-项目里没写进文档的约定,下次又得从头摸。认知酶把这些经验存成一条条小规则(酶),在恰当的时刻自动注入,
-并随着"这条到底帮上忙没有"的反馈越用越准。
+English | [简体中文](README.zh-CN.md)
 
-> 设计思路来自腾讯安全沙龙第 8 期(北京站)的分享《基于"认知酶"自进化架构的漏洞挖掘 Agentic 实践》(符芊红)。
-> 本仓库是那套架构的通用实现,不限于安全场景。
+Agents solve every task as if it were the first. The pitfall you hit last week, the bypass you found, the project convention that never made it into the docs: the next run starts from zero. Cognitive Enzyme stores such experience as small rules ("enzymes"), injects them automatically at the right moment, and gets more accurate as feedback arrives about whether each one actually helped.
 
-## 为什么这样做
+Slides (Chinese): [Tencent Security Salon #8, Beijing — an Agentic vulnerability-research practice built on the "cognitive enzyme" self-evolving architecture](https://github.com/Yeti-791/Tsec-Salon/blob/main/%E8%85%BE%E8%AE%AF%E5%AE%89%E5%85%A8%E6%B2%99%E9%BE%99%E7%AC%AC8%E6%9C%9F%EF%BC%88%E5%8C%97%E4%BA%AC%E7%AB%99%EF%BC%89/%E5%9F%BA%E4%BA%8E%E2%80%9C%E8%AE%A4%E7%9F%A5%E9%85%B6%E2%80%9D%E8%87%AA%E8%BF%9B%E5%8C%96%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98Agentic%E5%AE%9E%E8%B7%B5-%E7%AC%A6%E8%8A%8A%E7%BA%A2.pdf)
 
-演讲里总结了 Agent 做复杂任务时反复出现的几类问题,认知酶是针对其中"知识"这一环的解法:
+![Architecture: prime, failure and capture hooks feed a recall, judge and inject pipeline and a learning loop, backed by PostgreSQL, Qdrant and model providers](docs/img/architecture.svg)
 
-| 问题 | 表现 | 认知酶的做法 |
+## Why
+
+| Problem | What it looks like | What Cognitive Enzyme does |
 |---|---|---|
-| 隐性知识没显化 | 模型不知道"fastjson 在 jackson 下怎么写文件",只会走常规路径 | 把这类经验存成带"何时用 / 怎么做"的规则,任务前**被动注入**,不让模型去猜 |
-| 模型偷懒、早退 | 遇阻就下"无法利用"的结论,单一答案就满足 | 规则里可带"遇到 X 时至少再试两种绕过"这类流程约束 |
-| 依赖模型主动搜索 | 主动检索会被跳过,或检索词不对 | 不靠模型"想起来":hook 在提问前、工具报错时自动检索并注入 |
-| 技能越堆越多 | 大量固定 skills 拖慢模型、过拟合 | 只注入**当前情境激活**的少量规则,并按反馈裁剪 |
+| Tacit knowledge is never written down | The model does not know *how* to write a file through Jackson in a given setup, so it takes the generic path | Stores it as a rule with "when to use" and "what to do", and injects it **passively** before the task, so the model is not left to guess |
+| Models give up early | On a dead end they declare "not exploitable"; one answer is enough for them | A rule can carry process constraints such as "try at least two more bypasses before giving up" |
+| Active search gets skipped | The model forgets to search, or searches with the wrong words | Hooks retrieve before the prompt and again on a tool error, with no cooperation from the model |
+| Skill piles grow without bound | Dozens of fixed skills slow the model and overfit it | Only the few rules activated by the current situation are injected, then pruned by feedback |
 
-## 工作方式
+## How it works
 
-认知酶借用了两个概念:
+Two ideas are borrowed:
 
-- **双过程理论**(《思考,快与慢》):System 1 快速、自动,靠模式匹配;System 2 缓慢、刻意。大模型的推理是 System 2,
-  这里补的是 System 1——"看到这个情境就想起那条经验"。
-- **Cue → Routine → Reward**(酶的催化结构):每条记忆有"何时用"(触发情境)和"怎么做"(行为),
-  学习信号不是奖励本身,而是**奖励与预期的差异**(类多巴胺误差):有用就强化,被说反就削弱,变化才是进化的催化剂。
+- **Dual-process theory** (*Thinking, Fast and Slow*). System 1 is fast, automatic pattern matching; System 2 is slow and deliberate. An LLM's reasoning is System 2. This project adds the missing System 1: "this situation reminds me of that lesson".
+- **Cue → Routine → Reward**, the structure of an enzyme. Each memory has a *when* (the triggering situation) and a *how* (the behavior). The learning signal is not the reward itself but the **difference between reward and expectation**, a dopamine-style error: help reinforces, harm weakens.
 
-```text
- 智能体 hooks / 扩展 ──prime / failure / capture──► REST :8420 ──► PostgreSQL(记忆·日志·配置)
- (Claude Code / pi / 任意智能体)                      │          └─► Qdrant(向量·BM25 索引)
-                              MCP :8421 ◄── 模型主动检索/反馈      └─► 模型服务商(LLM/向量/精排/判官)
-                              管理后台 :13000 ◄── 同源代理 /api/*
-```
+One cycle:
 
-一轮循环:
+1. **prime (before the prompt).** Retrieve with the current situation: vector recall, BM25 lexical recall and matches against past situations; rerank; then an **applicability judge** scores each candidate with "probability this is directly useful for the request" and decides which memories to inject and how many. Injecting nothing is a valid outcome.
+2. **failure (on a tool error).** Retrieve again with the raw error text and surface fixes that worked before.
+3. **capture (session end or before compaction).** Extract "error → fix" experience from the session, pass it through a quality gate, dedupe it and file it under a domain.
+4. **feedback and consolidation.** The agent reports whether an injection helped; memories are reinforced or weakened. A scheduled job merges duplicates, quarantines weak ones and produces unverified hypotheses (dream, mutation, crossover) that get a small exploration budget.
 
-1. **prime(提问前)**:用当前情境检索——向量召回 + BM25 词面召回 + 经验样本匹配,精排,再由**适用性判官**
-   对每条候选打"对这个请求直接有用的概率",决定注入哪几条、注入几条(可以一条都不注)。
-2. **failure(工具报错时)**:拿报错原文再检索一次,给出以前修好过的办法。
-3. **capture(会话结束 / 压缩前)**:从会话里提炼"报错 → 修好"这类经验,过质量门、查重、归入领域后入库。
-4. **反馈**:智能体 `report` 结果,有用的记忆被强化、被说反的被削弱;后台定时**巩固**——合并重复、淘汰低质量,
-   并产生待验证的假设记忆(梦境、突变、交叉),以小概率进入"探索槽"接受检验。
+Unlike people, **there is no time decay**: an agent does not need to forget, only to keep what matters. Memories are quarantined by quality (zombies that keep failing, contradictions), not by age.
 
-和人不一样的一点:**不做遗忘和时效衰减**。Agent 不是人类,不需要遗忘,只要重点——靠记忆质量裁剪,而不是时间。
+## Quick start
 
-## 快速开始
-
-需要 Python 3.11+、Node.js 20.9+、Docker(提供 PostgreSQL 与 Qdrant)。
+Requires Python 3.11+, Node.js 20.9+ and Docker (for PostgreSQL and Qdrant).
 
 ```bash
 cp .env.example .env
 
-# 方式一:Docker 全栈(拉 CI 构建的镜像,CE_GHCR_OWNER 填镜像所在的账号/组织)
-CE_GHCR_OWNER=<你的账号> bash scripts/deploy.sh
+# Option 1: full stack in Docker (set CE_GHCR_OWNER to the account or org that hosts the images)
+CE_GHCR_OWNER=<your-account> bash scripts/deploy.sh
 
-# 方式二:存储用容器,应用跑本机(开发)
+# Option 2: storage in containers, app on the host (development)
 bash scripts/dev-up.sh
 ```
 
-打开 <http://localhost:13000>。管理员用户名默认 `admin`;密码用 `CE_ADMIN_PASSWORD` 指定,
-未指定时首次启动会生成随机密码并打在服务端日志里。登录后:
+Open <http://localhost:13000>. The admin user is `admin`; set the password with `CE_ADMIN_PASSWORD`, otherwise a random one is generated on first start and printed in the server log. Then:
 
-1. **改密码**(账户设置);
-2. **模型 → 服务商与模型**:加一个服务商和模型。对话模型、向量模型是必需的;精排、判官可选,缺了自动降级、不报错;
-3. **模型 → 模型绑定**:给各环节指定模型;
-4. **设置 → 访问与安全**:生成静态 API 令牌给 hook 用。
+1. Change the password (account settings).
+2. **Models → Providers and models**: add a provider and models. A chat model and an embedding model are required; rerank and judge are optional and degrade gracefully.
+3. **Models → Bindings**: assign a model to each stage.
+4. **Settings → Access and security**: create a static API token for the hooks.
 
-接口文档:<http://localhost:8420/docs>;健康检查:`/health`、`/readyz`。
+API docs: <http://localhost:8420/docs>. Health: `/health`, `/readyz`.
 
-## 接入智能体
+## Connect an agent
 
-| 智能体 | 方式 | 安装 |
+| Agent | Mechanism | Install |
 |---|---|---|
-| Claude Code | hook(prime / failure / capture) | `npx -y cognitive-enzyme-hook install --url http://<服务器>:8420 --token <API 令牌>`,细节见 [`hooks/npm/README.md`](hooks/npm/README.md) |
-| pi | 扩展 `hooks/pi/` | `ln -s $PWD/hooks/pi ~/.pi/agent/extensions/cognitive-enzyme`,细节见 [`hooks/pi/README.md`](hooks/pi/README.md) |
-| 任意 agent | REST / MCP | `POST /api/prime`(带 `source`、`cwd`、`project`);MCP 在 `:8421/mcp` 提供 `prime` / `search` / `recall` / `report` / `harvest` |
+| Claude Code | hooks (prime / failure / capture) | `npx -y cognitive-enzyme-hook install --url http://<server>:8420 --token <API token>`; see [`hooks/npm/README.md`](hooks/npm/README.md) |
+| pi | extension in `hooks/pi/` | `ln -s $PWD/hooks/pi ~/.pi/agent/extensions/cognitive-enzyme`; see [`hooks/pi/README.md`](hooks/pi/README.md) |
+| Any agent | REST / MCP | `POST /api/prime` (with `source`, `cwd`, `project`); MCP at `:8421/mcp` exposes `prime`, `search`, `recall`, `report`, `harvest` |
 
-所有接入方式都是 **fail-open**:后端不可用、超时、报错一律静默放过,绝不阻塞智能体。
+Every integration is **fail-open**: if the backend is down, slow or errors, the hook silently does nothing and never blocks the agent.
 
-## 配置都在后台
+## Evaluation: what we measured, and what it does not show
 
-模型、召回、判定、学习相关的全部参数(约 100 项)都在管理后台「设置 → 运行参数」里改,保存即生效;
-环境变量只用来在数据库连上之前启动(PostgreSQL、首个管理员、Qdrant 地址)。
+`tests/eval/` holds recall benchmarks and a framework for the harder question: *does an injected memory make the model answer correctly?* The numbers below come from one experiment on competition math and physics problems that a model had already failed twice closed-book (147 questions; 64 of them have an annotated correct memory, 83 question-memory pairs). Reproducing it needs the datasets, which are not shipped (see the scripts in `tests/eval/hardbench` and `tests/eval/diagnostic`).
 
-新增一个参数只需在 [`app/settings.py`](app/settings.py) 的 `SPECS_LIST` 加一条,后台自动出现,代码里 `settings.get("<key>")` 读取。
+**1. Recall: the right memory was mostly lost before the judge ever saw it.**
 
-## 目录结构
+With the default settings the judge's request budget is spent on the first few candidates, so the judge sees a median of 4 candidates out of a nominal pool of 36. Of the 65 annotated memories that reached the candidate pool, only 7 were judged.
 
-| 目录 | 内容 |
+![Of 83 annotated correct memories, 65 reach the candidate pool; with default settings 7 are judged and 6 injected, judging the whole pool gives 50 and 26, and the full set of changes gives 52 and 31](docs/img/recall-funnel.svg)
+
+Judging the whole pool (`judge.two_stage` with `judge.two_stage_compare=joint` and `judge.scan_pool=36`) raises "injected" from 6 to 26. Adding an RRF-built pool, no rank cut-off at rerank and wider recall (`judge.pool_order=rrf`, `ranking.rerank_keep=floor`, `recall.dense_limit=100`, `recall.cap=120`) reaches 31. The cost is more judge calls (13 to 17 per prime instead of 1) and more injected memories per question (0.58 before, 1.35 and 2.14 after).
+
+**2. Answers: injecting more did not make the model answer better.**
+
+For the same questions, a solver (MiniMax M3.1 Flash; the same model grades) answered closed-book and again with each injection setting.
+
+![Questions that flipped against a closed-book answer: annotated memory rescued 1 and harmed 3; default settings 1 and 4; judging the whole pool 2 and 5; all changes 3 and 7](docs/img/answers.svg)
+
+- Even handing the model the **annotated correct memory** rescued 1 question and harmed 3 (n = 63).
+- Injecting more memories rescued slightly more and harmed more. No difference is statistically significant (McNemar p between 0.34 and 0.63).
+- Closed-book answers are themselves noisy: in earlier runs of a different model (GLM-5.3), 56 of 353 physics questions (16%) flipped between two identical closed-book attempts. These counts sit inside that kind of noise.
+
+What this supports: **recall can be made far more complete, but on these hard problems a retrieved memory is not the same as a useful one.** The memories we have for them are mostly method hints, and a hint does not carry a model past a problem it cannot solve. What it does not show: that injection does not help in general. This was one solver, one judge model, a hard problem set and small counts. Treat the recall change as ready to try and the answer-level effect as unproven.
+
+Other caveats worth knowing:
+
+- Recall is limited by several count-based cut-offs in the pipeline (rerank keep, judge pool, the judge's per-request token budget). Memories with long bodies hit them sooner. The relevant knobs are under `ranking.*`, `judge.*` and `recall.*`.
+- The new recall options default to the previous behavior. Nothing changes until you turn them on.
+- Datasets (competition problems, public corpora) are not distributed with this repository. Build them with the scripts and follow each dataset's license.
+
+## Configuration lives in the console
+
+About 100 parameters for models, recall, judging and learning are edited in **Settings → Runtime** and take effect on save. Environment variables are only for what is needed before the database is reachable: PostgreSQL, the first admin and the Qdrant address.
+
+To add a parameter, add one entry to `SPECS_LIST` in [`app/settings.py`](app/settings.py); it appears in the console automatically and is read in code with `settings.get("<key>")`.
+
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| `app/` | 后端:`matching/` 召回与判定,`learning/` 学习闭环(capture / 巩固 / 梦境),`distill/` 判定记录与老师标注,`routers/` REST |
-| `hooks/` | Claude Code hook(Python 版与 npm 包)和 pi 扩展 |
-| `webui/` | 管理后台(Next.js + shadcn/ui):记忆库、召回调试、进化事件、模型绑定、运行参数、审计 |
-| `ops/gardener/` | 夜间园丁:容器里跑 headless agent,对照代码库复核记忆 |
-| `scripts/` | 部署、本地开发、评测与排查脚本 |
-| `tests/` | 单测;`tests/eval/` 是召回与效果评测基准(需要自行构建数据,见其中 README) |
+| `app/` | Backend: `matching/` recall and judging, `learning/` the learning loop (capture, consolidation, dreams), `distill/` decision records and teacher labels, `routers/` REST |
+| `hooks/` | Claude Code hooks (Python and npm package) and the pi extension |
+| `webui/` | Admin console (Next.js + shadcn/ui): memories, recall debugging, evolution events, model bindings, runtime settings, audit |
+| `ops/gardener/` | Nightly gardener: a headless agent in a container that re-checks memories against the codebase |
+| `scripts/` | Deployment, local development, evaluation and diagnostic scripts |
+| `tests/` | Unit tests; `tests/eval/` holds the recall and effect benchmarks |
 
-## 评测与已知局限
-
-`tests/eval/` 里有召回评测、真实公开数据基准和"记忆注入后能不能答对"的对照实验框架。几点要如实说:
-
-- 注入的记忆**不保证**让模型答对:对"本来就会"的题没有用武之地,对难题则取决于记忆内容本身是否真的对症。
-- 召回链路上有多道按条数硬截断的关卡(精排保留数、判定池、判官单次请求的 token 预算),在记忆较长时目标记忆可能在到达判官之前就被截掉;
-  相关的可调参数见 `ranking.*`、`judge.*`、`recall.*`。
-- 评测数据(竞赛题集、公开数据集)不随仓库分发,请用对应脚本自行构建,并遵守各数据集的许可。
-
-## 开发
+## Development
 
 ```bash
-python -m pytest tests --ignore=tests/eval     # 后端单测
-node --test hooks/pi/                          # pi 扩展测试
-cd webui && npm run typecheck && npm run lint  # 前端
+python -m pytest tests --ignore=tests/eval     # backend unit tests
+node --test hooks/pi/                          # pi extension tests
+cd webui && npm run typecheck && npm run lint  # frontend
 ```
 
-## 安全
+## Security
 
-- 管理员初始密码随机生成(或用 `CE_ADMIN_PASSWORD` 指定),登录后立刻改掉;静态 API 令牌只放行数据面接口,泄露后在后台轮换。MCP 首次启动自动生成令牌,无令牌不开放。
-- 登录有限速(同 IP + 账号 5 分钟 10 次),停用用户或改密后旧 JWT 立即失效。
-- `docker-compose.yml` 里把 Docker socket 挂给了 app(用于夜间园丁)。拿到 socket 等于拿到宿主机 root,只适合单用户内网;不需要园丁就删掉那两行挂载。
-- `.env`、`webui/.env.local`、`~/.config/cognitive-enzyme/hook.env` 均不入库。
+- The initial admin password is random (or set by `CE_ADMIN_PASSWORD`); change it after first login. Static API tokens only open the data-plane endpoints and can be rotated in the console. The MCP server generates a token on first start and stays closed without one.
+- Login is rate-limited (10 attempts per IP and account per 5 minutes); disabling a user or changing a password invalidates old JWTs immediately.
+- `docker-compose.yml` mounts the Docker socket into the app for the nightly gardener. Access to that socket is root on the host, which is acceptable only for a single-user internal deployment. Delete the two mount lines if you do not need the gardener.
+- `.env`, `webui/.env.local` and `~/.config/cognitive-enzyme/hook.env` are never committed.
 
-## 致谢
+## License
 
-演讲分享中致谢:Unam4、柯字辈、java-chains。
+[GNU Affero General Public License v3.0 or later](LICENSE) (AGPL-3.0-or-later).
 
-## 许可
-
-[GNU Affero General Public License v3.0 或更高版本](LICENSE)(AGPL-3.0-or-later)。
-
-如果你把本软件修改后作为网络服务提供给他人使用,必须向这些用户提供你修改后的完整源代码。
-管理后台只使用 shadcn/ui(MIT)与 lucide-react(ISC)等开源组件。
+If you modify this software and offer it as a network service to others, you must make the complete modified source available to those users. The admin console uses only open-source components such as shadcn/ui (MIT) and lucide-react (ISC).

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 372" role="img" aria-labelledby="t d">
+  <title id="t">Does injection change whether the model answers correctly?</title>
+  <desc id="d">On 147 questions a model had failed, for each injection setting the number of questions that went from wrong to right (rescued) and from right to wrong (harmed) against a fresh closed-book answer. Annotated gold memory: 1 rescued, 3 harmed on 63 questions. Default: 1 and 4. Judge whole pool: 2 and 5. Full changes: 3 and 7. None of the differences is statistically significant.</desc>
+  <style>
+    :root { --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --line:#dcdbd5; --a:#2a78d6; --b:#eb6834; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --line:#3a3935; --a:#3987e5; --b:#d95926; }
+    }
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--ink); font-size: 13px; }
+    .s { fill: var(--ink2); font-size: 12px; }
+    .ti { font-size: 15px; font-weight: 600; }
+    .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .g { stroke: var(--line); stroke-width: 1; }
+  </style>
+  <rect width="880" height="372" fill="var(--bg)"/>
+  <text class="ti" x="24" y="30">Answer-level effect vs. a fresh closed-book answer</text>
+  <text class="s" x="24" y="50">Questions that flipped. Counts are small and no difference is significant (McNemar p ≥ 0.34).</text>
+
+  <!-- scale: 0..8 questions -> 260..760, 62.5 px per question -->
+  <g class="g"><path d="M260 70 V300"/><path d="M385 70 V300"/><path d="M510 70 V300"/><path d="M635 70 V300"/><path d="M760 70 V300"/></g>
+  <text class="s" x="260" y="318" text-anchor="middle">0</text>
+  <text class="s" x="385" y="318" text-anchor="middle">2</text>
+  <text class="s" x="510" y="318" text-anchor="middle">4</text>
+  <text class="s" x="635" y="318" text-anchor="middle">6</text>
+  <text class="s" x="760" y="318" text-anchor="middle">8</text>
+
+  <text x="24" y="95">Annotated correct memory</text><text class="s" x="24" y="111">n = 63, upper bound</text>
+  <rect x="260" y="80" width="63" height="14" rx="4" fill="var(--a)"/><text class="v" x="331" y="91">1</text>
+  <rect x="260" y="98" width="188" height="14" rx="4" fill="var(--b)"/><text class="v" x="456" y="109">3</text>
+
+  <text x="24" y="155">Default settings</text><text class="s" x="24" y="171">n = 141</text>
+  <rect x="260" y="140" width="63" height="14" rx="4" fill="var(--a)"/><text class="v" x="331" y="151">1</text>
+  <rect x="260" y="158" width="250" height="14" rx="4" fill="var(--b)"/><text class="v" x="518" y="169">4</text>
+
+  <text x="24" y="215">Judge the whole pool</text><text class="s" x="24" y="231">n = 143</text>
+  <rect x="260" y="200" width="125" height="14" rx="4" fill="var(--a)"/><text class="v" x="393" y="211">2</text>
+  <rect x="260" y="218" width="313" height="14" rx="4" fill="var(--b)"/><text class="v" x="581" y="229">5</text>
+
+  <text x="24" y="275">All changes</text><text class="s" x="24" y="291">n = 144</text>
+  <rect x="260" y="260" width="188" height="14" rx="4" fill="var(--a)"/><text class="v" x="456" y="271">3</text>
+  <rect x="260" y="278" width="438" height="14" rx="4" fill="var(--b)"/><text class="v" x="706" y="289">7</text>
+
+  <g transform="translate(24,344)">
+    <rect width="10" height="10" rx="2" fill="var(--a)"/><text class="s" x="16" y="9">rescued: wrong closed-book, right with injection</text>
+    <rect x="340" width="10" height="10" rx="2" fill="var(--b)"/><text class="s" x="356" y="9">harmed: right closed-book, wrong with injection</text>
+  </g>
+</svg>
